@@ -3,1383 +3,933 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>パーソナルカラー診断 | あなたに似合う色を見つけよう</title>
+    <title>輝装心コーディネーター</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary-orange: #FF9800;
+            --primary-red: #FF120A;
+            --primary-yellow: #FFC107;
+            --accent-light: #FFE082;
+            --brown-primary: #6B4423;
+            --brown-secondary: #8B5A3C;
+            --brown-light: #A0735E;
+            --cream: #F5F1ED;
+            --warm-white: #FEFCF8;
         }
-
+        
         body {
-            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fef8f5;
-            overflow-x: hidden;
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.7;
         }
-
-        /* ヘッダー */
-        header {
-            background: linear-gradient(135deg, #fff8f0 0%, #fef5ef 100%);
-            padding: 10px 0;
-            box-shadow: 0 2px 10px rgba(255, 18, 10, 0.1);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+        
+        .theme-orange {
+            --bg-primary: var(--warm-white);
+            --bg-secondary: var(--cream);
+            --text-primary: #2D1810;
+            --text-secondary: #5D4037;
+            --accent: var(--primary-orange);
+            --accent-hover: var(--primary-red);
+            --card-bg: rgba(255, 152, 0, 0.05);
+            --border: rgba(255, 152, 0, 0.2);
         }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            max-width: 375px;
-            margin: 0 auto;
+        
+        .theme-brown {
+            --bg-primary: #F7F3F0;
+            --bg-secondary: #EDE4DB;
+            --text-primary: var(--brown-primary);
+            --text-secondary: var(--brown-secondary);
+            --accent: var(--brown-primary);
+            --accent-hover: var(--brown-secondary);
+            --card-bg: rgba(107, 68, 35, 0.05);
+            --border: rgba(107, 68, 35, 0.2);
         }
-
-        .logo {
-            width: 40px;
-            height: 40px;
-        }
-
-        .hamburger {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background: #FF120A;
-            margin: 5px 0;
-            border-radius: 2px;
-            transition: 0.3s;
-        }
-
-        /* メインコンテンツ */
-        main {
-            margin-top: 70px;
-            padding-bottom: 70px;
-        }
-
-        .container {
-            max-width: 375px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* ファーストビュー */
-        .hero {
-            background: linear-gradient(135deg, #fff8f0 0%, #ffebe1 100%);
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 235, 130, 0.3) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 28px;
-            font-weight: bold;
-            color: #FF120A;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .hero .subtitle {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #FF120A 0%, #FF5722 100%);
+        
+        .bg-primary { background-color: var(--bg-primary); }
+        .bg-secondary { background-color: var(--bg-secondary); }
+        .text-primary { color: var(--text-primary); }
+        .text-secondary { color: var(--text-secondary); }
+        .accent-bg { background-color: var(--accent); }
+        .accent-text { color: var(--accent); }
+        .accent-border { border-color: var(--accent); }
+        .card-bg { background-color: var(--card-bg); }
+        .custom-border { border-color: var(--border); }
+        
+        .btn-primary {
+            background-color: var(--accent);
             color: white;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(255, 18, 10, 0.3);
             transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
         }
-
-        .cta-button:hover {
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 18, 10, 0.4);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
-
-        /* セクション共通 */
-        .section {
-            padding: 40px 0;
-        }
-
-        .section-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #FF120A;
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
-            display: block;
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        /* セクションジャンプカード */
-        .section-cards {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 30px 0;
-        }
-
-        .section-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px 15px;
-            text-align: center;
-            text-decoration: none;
-            color: #333;
-            box-shadow: 0 4px 15px rgba(255, 18, 10, 0.1);
+        
+        .btn-outline {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
         }
-
-        .section-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(255, 18, 10, 0.2);
-            border-color: #FFE082;
+        .btn-outline:hover {
+            background-color: var(--accent);
+            color: white;
+            transform: translateY(-2px);
         }
-
-        .section-card .icon {
-            font-size: 30px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .section-card .title {
-            font-size: 14px;
-            font-weight: bold;
-            color: #FF120A;
-        }
-
-        /* ページ表示エリア */
-        .page-content {
-            display: none;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        .page-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ハンバーガーメニュー */
-        .overlay-menu {
+        
+        .hamburger-menu {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: linear-gradient(135deg, #fff8f0 0%, #ffebe1 100%);
-            z-index: 9999;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
             display: none;
-            padding: 80px 20px 20px;
-            overflow-y: auto;
+            align-items: center;
+            justify-content: center;
         }
-
-        .overlay-menu.active {
-            display: block;
-            animation: fadeInUp 0.3s ease;
+        
+        .hamburger-menu.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
         }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        .hamburger-content {
+            animation: slideUp 0.3s ease;
         }
-
-        .menu-close {
-            position: absolute;
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(255,152,0,0.9), rgba(255,18,10,0.8));
+        }
+        
+        .theme-brown .gradient-overlay {
+            background: linear-gradient(135deg, rgba(107,68,35,0.9), rgba(139,90,60,0.8));
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 3rem 0;
+        }
+        
+        .logo-svg {
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .theme-brown .logo-svg ellipse,
+        .theme-brown .logo-svg circle {
+            fill: var(--brown-primary) !important;
+        }
+        
+        .theme-switch {
+            position: fixed;
             top: 20px;
             right: 20px;
-            background: none;
+            z-index: 100;
+            background: var(--accent);
+            color: white;
             border: none;
-            font-size: 30px;
-            color: #FF120A;
-            cursor: pointer;
-        }
-
-        .menu-items {
-            list-style: none;
-        }
-
-        .menu-items li {
-            margin-bottom: 20px;
-        }
-
-        .menu-items a {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            box-shadow: 0 2px 10px rgba(255, 18, 10, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .menu-items a:hover {
-            background: #fff8f0;
-            transform: translateX(5px);
-        }
-
-        .menu-items .icon {
-            font-size: 20px;
-            margin-right: 15px;
-            color: #FF120A;
-        }
-
-        /* サービス内容 */
-        .service-item {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(255, 18, 10, 0.1);
-        }
-
-        .service-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #FF120A;
-            margin-bottom: 15px;
-        }
-
-        .service-description {
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .before-after {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .before-after div {
-            flex: 1;
-            text-align: center;
-        }
-
-        .before-after img {
-            width: 100%;
-            height: 100px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 12px;
-        }
-
-        /* お客様の声 */
-        .voice-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(255, 18, 10, 0.1);
-        }
-
-        .voice-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .voice-avatar {
+            border-radius: 50%;
             width: 50px;
             height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #FFE082 0%, #FFC107 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-
-        .voice-info h4 {
-            color: #FF120A;
-            font-size: 16px;
-            margin-bottom: 3px;
-        }
-
-        .voice-info p {
-            color: #666;
-            font-size: 12px;
-        }
-
-        .voice-content {
-            color: #333;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        /* フロー */
-        .flow-step {
-            display: flex;
-            margin-bottom: 25px;
-            align-items: flex-start;
-        }
-
-        .step-number {
-            background: linear-gradient(135deg, #FF120A 0%, #FF5722 100%);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-
-        .step-content h3 {
-            color: #FF120A;
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .step-content p {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        /* 料金表 */
-        .price-table {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(255, 18, 10, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .price-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .price-item:last-child {
-            border-bottom: none;
-        }
-
-        .price-name {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .price-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: #FF120A;
-        }
-
-        /* FAQ */
-        .faq-item {
-            background: white;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(255, 18, 10, 0.1);
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: 20px;
             cursor: pointer;
-            font-weight: bold;
-            color: #FF120A;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .faq-question:hover {
-            background: #fff8f0;
-        }
-
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
             transition: all 0.3s ease;
-            color: #666;
-            line-height: 1.6;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-
-        .faq-answer.open {
-            padding: 20px;
-            max-height: 200px;
+        
+        .theme-switch:hover {
+            transform: scale(1.1);
         }
-
-        .faq-toggle {
-            font-size: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-toggle.open {
-            transform: rotate(180deg);
-        }
-
-        /* フォーム */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .required {
-            color: #FF120A;
-            font-size: 12px;
-            margin-left: 5px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #f0f0f0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #FFC107;
-        }
-
-        .form-group textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
-            margin-top: 3px;
-        }
-
-        .checkbox-group label {
-            margin-bottom: 0;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
-        /* 固定フッターCTA */
+        
         .fixed-footer {
             position: fixed;
             bottom: 0;
-            width: 100%;
-            max-width: 375px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
+            right: 0;
             background: white;
-            display: flex;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 999;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 50;
+            height: 56px;
         }
-
-        .footer-btn {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-        }
-
-        .footer-btn.menu {
-            background: #f8f8f8;
-            color: #666;
-        }
-
-        .footer-btn.contact {
-            background: linear-gradient(135deg, #FF120A 0%, #FF5722 100%);
+        
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: var(--accent);
             color: white;
-        }
-
-        .footer-btn:hover {
-            opacity: 0.8;
-        }
-
-        /* レスポンシブ調整 */
-        @media (max-width: 374px) {
-            .container {
-                padding: 0 15px;
-            }
-            
-            .hero h1 {
-                font-size: 24px;
-            }
-            
-            .section-cards {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* 戻るボタン */
-        .back-button {
-            display: inline-flex;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
-            color: #FF120A;
-            text-decoration: none;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
-            margin-bottom: 20px;
-            padding: 10px;
-            transition: color 0.3s ease;
+            margin-bottom: 1rem;
         }
-
-        .back-button:hover {
-            color: #FF5722;
-        }
-
-        .back-button::before {
-            content: '←';
-            margin-right: 5px;
-            font-size: 18px;
+        
+        @media (min-width: 768px) {
+            .hamburger-menu {
+                width: 400px;
+                height: auto;
+                right: 0;
+                left: auto;
+                top: 70px;
+                border-radius: 0 0 0 20px;
+            }
         }
     </style>
 </head>
-<body>
-    <!-- ヘッダー -->
-    <header>
-        <div class="header-content">
-            <div class="logo">
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <ellipse cx="100" cy="35" rx="15" ry="30" fill="#FF120A" opacity="0.9"/>
-                    <ellipse cx="165" cy="100" rx="30" ry="15" fill="#FFC107" opacity="0.9"/>
-                    <ellipse cx="100" cy="165" rx="15" ry="30" fill="#FF120A" opacity="0.9"/>
-                    <ellipse cx="35" cy="100" rx="30" ry="15" fill="#FFC107" opacity="0.9"/>
-                    <ellipse cx="138" cy="62" rx="12" ry="25" fill="#FF9800" transform="rotate(45 138 62)"/>
-                    <ellipse cx="138" cy="138" rx="12" ry="25" fill="#FF9800" transform="rotate(-45 138 138)"/>
-                    <ellipse cx="62" cy="138" rx="12" ry="25" fill="#FF9800" transform="rotate(45 62 138)"/>
-                    <ellipse cx="62" cy="62" rx="12" ry="25" fill="#FF9800" transform="rotate(-45 62 62)"/>
-                    <ellipse cx="100" cy="55" rx="8" ry="20" fill="#FFB74D" opacity="0.8"/>
-                    <ellipse cx="145" cy="100" rx="20" ry="8" fill="#FFB74D" opacity="0.8"/>
-                    <ellipse cx="100" cy="145" rx="8" ry="20" fill="#FFB74D" opacity="0.8"/>
-                    <ellipse cx="55" cy="100" rx="20" ry="8" fill="#FFB74D" opacity="0.8"/>
-                    <ellipse cx="118" cy="82" rx="6" ry="15" fill="#FFE082" transform="rotate(45 118 82)"/>
-                    <ellipse cx="118" cy="118" rx="6" ry="15" fill="#FFE082" transform="rotate(-45 118 118)"/>
-                    <ellipse cx="82" cy="118" rx="6" ry="15" fill="#FFE082" transform="rotate(45 82 118)"/>
-                    <ellipse cx="82" cy="82" rx="6" ry="15" fill="#FFE082" transform="rotate(-45 82 82)"/>
-                    <circle cx="100" cy="100" r="25" fill="#FF120A"/>
-                    <circle cx="95" cy="90" r="8" fill="#FFEB3B" opacity="0.9"/>
-                    <circle cx="90" cy="85" r="4" fill="#FFF9C4" opacity="0.7"/>
-                </svg>
+<body class="theme-orange bg-primary text-primary min-h-screen">
+    <!-- Theme Switch Button -->
+    <!--<button class="theme-switch" onclick="toggleTheme()" title="テーマを切り替え">
+        <i class="fas fa-palette"></i>
+    </button>-->
+
+    <!-- Header -->
+    <header class="bg-primary shadow-sm relative z-40">
+        <div class="max-w-md mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="logo-svg w-10 h-10">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                        <ellipse cx="100" cy="35" rx="15" ry="30" fill="#FF120A" opacity="0.9"/>
+                        <ellipse cx="165" cy="100" rx="30" ry="15" fill="#FFC107" opacity="0.9"/>
+                        <ellipse cx="100" cy="165" rx="15" ry="30" fill="#FF120A" opacity="0.9"/>
+                        <ellipse cx="35" cy="100" rx="30" ry="15" fill="#FFC107" opacity="0.9"/>
+                        <ellipse cx="138" cy="62" rx="12" ry="25" fill="#FF9800" transform="rotate(45 138 62)"/>
+                        <ellipse cx="138" cy="138" rx="12" ry="25" fill="#FF9800" transform="rotate(-45 138 138)"/>
+                        <ellipse cx="62" cy="138" rx="12" ry="25" fill="#FF9800" transform="rotate(45 62 138)"/>
+                        <ellipse cx="62" cy="62" rx="12" ry="25" fill="#FF9800" transform="rotate(-45 62 62)"/>
+                        <ellipse cx="100" cy="55" rx="8" ry="20" fill="#FFB74D" opacity="0.8"/>
+                        <ellipse cx="145" cy="100" rx="20" ry="8" fill="#FFB74D" opacity="0.8"/>
+                        <ellipse cx="100" cy="145" rx="8" ry="20" fill="#FFB74D" opacity="0.8"/>
+                        <ellipse cx="55" cy="100" rx="20" ry="8" fill="#FFB74D" opacity="0.8"/>
+                        <ellipse cx="118" cy="82" rx="6" ry="15" fill="#FFE082" transform="rotate(45 118 82)"/>
+                        <ellipse cx="118" cy="118" rx="6" ry="15" fill="#FFE082" transform="rotate(-45 118 118)"/>
+                        <ellipse cx="82" cy="118" rx="6" ry="15" fill="#FFE082" transform="rotate(45 82 118)"/>
+                        <ellipse cx="82" cy="82" rx="6" ry="15" fill="#FFE082" transform="rotate(-45 82 82)"/>
+                        <circle cx="100" cy="100" r="25" fill="#FF120A"/>
+                        <circle cx="95" cy="90" r="8" fill="#FFEB3B" opacity="0.9"/>
+                        <circle cx="90" cy="85" r="4" fill="#FFF9C4" opacity="0.7"/>
+                    </svg>
+                </div>
+                <h1 class="text-lg font-bold">輝装心コーディネーター</h1>
             </div>
-            <button class="hamburger" id="hamburger" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="hamburger-btn p-2" onclick="toggleMenu()">
+                <i class="fas fa-bars text-xl"></i>
             </button>
         </div>
     </header>
 
-    <!-- オーバーレイメニュー -->
-    <nav class="overlay-menu" id="overlayMenu">
-        <button class="menu-close" id="menuClose">×</button>
-        <ul class="menu-items">
-            <li><a href="#" onclick="showPage('home')"><span class="icon">🏠</span>トップページ</a></li>
-            <li><a href="#" onclick="showPage('greeting')"><span class="icon">👋</span>ご挨拶</a></li>
-            <li><a href="#" onclick="showPage('services')"><span class="icon">🎨</span>サービス内容</a></li>
-            <li><a href="#" onclick="showPage('voices')"><span class="icon">💬</span>お客様の声</a></li>
-            <li><a href="#" onclick="showPage('flow')"><span class="icon">📋</span>お申し込み後の流れ</a></li>
-            <li><a href="#" onclick="showPage('pricing')"><span class="icon">💰</span>料金体系</a></li>
-            <li><a href="#" onclick="showPage('faq')"><span class="icon">❓</span>よくあるご質問</a></li>
-            <li><a href="#" onclick="showPage('contact')"><span class="icon">📧</span>ご予約</a></li>
-            <li><a href="#" onclick="showPage('privacy')"><span class="icon">🔒</span>プライバシーポリシー</a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <!-- トップページ -->
-        <div id="home" class="page-content active">
-            <section class="hero">
-                <div class="hero-content">
-                    <h1>あなたに似合う色を<br>見つけませんか？</h1>
-                    <p class="subtitle">パーソナルカラー診断で<br>もっと素敵なあなたに</p>
-                    <button class="cta-button" onclick="showPage('contact')">ご予約</button>
-                </div>
-            </section>
-
-            <section class="section">
-                <div class="container">
-                    <h2 class="section-title">サービス一覧</h2>
-                    <div class="section-cards">
-                        <a href="#" class="section-card" onclick="showPage('greeting')">
-                            <span class="icon">👋</span>
-                            <div class="title">ご挨拶</div>
-                        </a>
-                        <a href="#" class="section-card" onclick="showPage('services')">
-                            <span class="icon">🎨</span>
-                            <div class="title">サービス内容</div>
-                        </a>
-                        <a href="#" class="section-card" onclick="showPage('voices')">
-                            <span class="icon">💬</span>
-                            <div class="title">お客様の声</div>
-                        </a>
-                        <a href="#" class="section-card" onclick="showPage('flow')">
-                            <span class="icon">📋</span>
-                            <div class="title">お申し込み後の流れ</div>
-                        </a>
-                        <a href="#" class="section-card" onclick="showPage('pricing')">
-                            <span class="icon">💰</span>
-                            <div class="title">料金体系</div>
-                        </a>
-                        <a href="#" class="section-card" onclick="showPage('faq')">
-                            <span class="icon">❓</span>
-                            <div class="title">よくあるご質問</div>
-                        </a>
-                    </div>
-                </div>
-            </section>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <div class="hamburger-content text-center">
+            <button class="absolute top-6 right-6 text-white text-2xl" onclick="toggleMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+            <nav class="mt-12">
+                <ul class="space-y-6 text-white text-lg">
+                    <li><a href="#top" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-user"></i><span>トップページ</span></a></li>
+                    <li><a href="#greeting" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-user"></i><span>ご挨拶</span></a></li>
+                    <li><a href="#services" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-palette"></i><span>サービス内容</span></a></li>
+                    <li><a href="#testimonials" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-star"></i><span>お客様の声</span></a></li>
+                    <li><a href="#process" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-list-ol"></i><span>お申し込み後の流れ</span></a></li>
+                    <li><a href="#pricing" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-yen-sign"></i><span>料金体系</span></a></li>
+                    <li><a href="#faq" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-question-circle"></i><span>よくあるご質問</span></a></li>
+                    <li><a href="#contact" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-envelope"></i><span>ご予約</span></a></li>
+                    <li><a href="#contact" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-envelope"></i><span>プライバシーポリシー</span></a></li>
+                </ul>
+            </nav>
         </div>
+    </div>
 
-        <!-- ご挨拶ページ -->
-        <div id="greeting" class="page-content">
-            <div class="container">
-                <a href="#" class="back-button" onclick="showPage('home')">トップに戻る</a>
-                <h2 class="section-title">ご挨拶</h2>
-                
-                <div style="background: white; border-radius: 15px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(255, 18, 10, 0.1);">
-                    <p style="line-height: 1.8; color: #333; margin-bottom: 20px;">
-                        こんにちは♪輝装心コーディネーターのサカモトマサコです。<br><br>
-                        
-                        活動名である【輝装心】という字には「輝く装い心」、装いを通じて心まで輝いてほしいという願いを込めました。<br><br>
-                        
-                        パーソナルカラー講師として20年以上、多くの方々に似合う色をご提案してきましたが、時間が経つと元の好みに戻ってしまう方も多く、色の効果を定着させるには心の納得が必要だと気づき、心理学も学びました。<br><br>
-                        
-                        現在は、パーソナルカラー診断・コーディネート・心理サポートを含むオンリーワンのレッスンを展開しています。<br><br>
-                        
-                        また、私自ら手掛けたハンドメイドアクセサリー「ソウタシエジュエリー」の制作も行っています。<br>
-                        パーソナルカラーと合わせて、装いに合わせる小物選びをすることで、より素敵に印象付けることもできます。<br>
-                        本来の美しさを引き出すお手伝いを、心を込めてさせていただきます。
+    <!-- Main Content -->
+    <main class="pb-0">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden">
+            <div class="gradient-overlay absolute inset-0"></div>
+            <div class="relative z-10 max-w-md mx-auto px-4 py-16 text-center text-white">
+                <h2 class="text-3xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">
+                    あなたの魅力を<br>最大限に引き出す
+                </h2>
+                <p class="text-lg mb-8 opacity-90">
+                    パーソナルカラー診断で<br>
+                    本来の美しさを引き出すサポートをいたします。
+                </p>
+                <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold shadow-lg">
+                    相談を予約する
+                </button>
+            </div>
+        </section>
+
+        <!-- Section Navigation -->
+        <!--<section class="max-w-md mx-auto px-4 py-12">
+            <div class="grid grid-cols-2 gap-4">
+                <a href="#greeting" class="card-bg card-hover p-6 rounded-lg text-center custom-border border-2">
+                    <div class="service-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="font-semibold text-primary">ご挨拶</h3>
+                    <p class="text-sm text-secondary mt-2">サカモトマサコのご紹介</p>
+                </a>
+                <a href="#services" class="card-bg card-hover p-6 rounded-lg text-center custom-border border-2">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="font-semibold text-primary">サービス</h3>
+                    <p class="text-sm text-secondary mt-2">ご提供のメニュー詳細</p>
+                </a>
+                <a href="#testimonials" class="card-bg card-hover p-6 rounded-lg text-center custom-border border-2">
+                    <div class="service-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="font-semibold text-primary">お客様の声</h3>
+                    <p class="text-sm text-secondary mt-2">体験談・口コミ</p>
+                </a>
+                <a href="#pricing" class="card-bg card-hover p-6 rounded-lg text-center custom-border border-2">
+                    <div class="service-icon">
+                        <i class="fas fa-yen-sign"></i>
+                    </div>
+                    <h3 class="font-semibold text-primary">料金</h3>
+                    <p class="text-sm text-secondary mt-2">各プランの料金詳細</p>
+                </a>
+            </div>
+        </section>-->
+
+        <!-- Greeting Section -->
+        <section id="greeting" class="bg-secondary py-16">
+            <div class="max-w-md mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-bold text-primary mb-4">ご挨拶</h2>
+                    <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+                </div>
+                <div class="bg-primary rounded-lg p-6 shadow-lg">
+                <figure class="mx-auto mb-6" style="max-width:375px;">
+  <img
+    src="https://newnormal-creator.com/wp-content/uploads/2025/09/jigazo3.jpg"
+    alt="サカモトマサコのプロフィール写真"
+    loading="lazy"
+    decoding="async"
+    class="block w-full h-auto mx-auto rounded-lg shadow-lg"
+    width="375"
+  >
+</figure>
+                    <!--<div class="w-24 h-24 accent-bg rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <i class="fas fa-user text-white text-2xl"></i>
+                    </div>-->
+                    <h3 class="text-xl font-semibold text-center mb-4">サカモトマサコ</h3>
+                    <!--<p class="text-center text-secondary mb-6">
+                        パーソナルカラーアナリスト<br>
+                        日本パーソナルカラー協会認定講師
+                    </p>-->
+                    <p class="text-sm leading-relaxed text-secondary">
+                        こんにちは♪輝装心コーディネーターのサカモトマサコです。<br>
+                        活動名である【輝装心】という字には「輝く装い心」、装いを通じて心まで輝いてほしいという願いを込めました。<br>
+                        <br>
+                        パーソナルカラー講師として20年以上、多くの方々に似合う色をご提案してきましたが、時間が経つと元の好みに戻ってしまう方も多く、色の効果を定着させるには心の納得が必要だと気づき、心理学も学びました。
+現在は、パーソナルカラー診断・コーディネート・心理サポートを含むオンリーワンのレッスンを展開しています。<br>
+<br>
+また、私自ら手掛けたハンドメイドアクセサリー「ソウタシエジュエリー」の制作も行っています。<br>
+パーソナルカラーと合わせて、装いに合わせる小物選びをすることで、より素敵に印象付けることもできます。<br>
+<br>
+本来の美しさを引き出すお手伝いを、心を込めてさせていただきます。
                     </p>
                 </div>
+<div class="mt-6 text-center">
+  <a href="/greeting.html" class="btn-primary inline-flex items-center px-6 py-3 rounded-lg">
+    <span class="mr-2">経歴を詳しく見る</span>
+    <i class="fas fa-chevron-right"></i>
+  </a>
+</div>
 
-                <div style="background: white; border-radius: 15px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(255, 18, 10, 0.1);">
-                    <h3 style="color: #FF120A; font-size: 18px; margin-bottom: 15px;">経歴・資格</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
-                            <strong>2020年</strong> パーソナルカラーアナリスト資格取得
-                        </li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
-                            <strong>2021年</strong> 色彩検定1級取得
-                        </li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
-                            <strong>2022年</strong> パーソナルカラー診断サービス開始
-                        </li>
-                        <li style="padding: 10px 0;">
-                            <strong>現在</strong> 延べ500名以上の診断実績
-                        </li>
-                    </ul>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-16">
+            <div class="max-w-md mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-bold text-primary mb-4">サービス内容</h2>
+                    <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
                 </div>
+                
+                <div class="space-y-8">
+                    <!-- Service A -->
+                    <div class="card-bg rounded-lg p-6 custom-border border-2">
+<h3 class="text-xl font-semibold text-primary mb-4">カフェコンサルティング</h3>
+<figure class="mx-auto mb-4" style="max-width:375px;">
+  <img
+    src="https://newnormal-creator.com/wp-content/uploads/2025/09/pexels-mike-jones-9051671-scaled.jpg"
+    alt="カフェでのコンサルティングのイメージ"
+    loading="lazy"
+    decoding="async"
+    class="block w-full h-auto rounded-md shadow-md"
+    width="375"
+    style="aspect-ratio:16/9;object-fit:cover;"
+  >
+</figure>
+                        <p class="text-secondary mb-6">
+                            お気に入りのカフェでリラックスした雰囲気の中、お悩みやご希望を丁寧にお聞きし、最適なプランをご提案いたします。
+                        </p>
+                        <div class="flex space-x-3">
+                            <button class="btn-primary flex-1 py-2 px-4 rounded text-sm">詳しく見る</button>
+                        </div>
+                    </div>
 
-                <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(255, 18, 10, 0.1);">
-                    <h3 style="color: #FF120A; font-size: 18px; margin-bottom: 15px;">SNS・ブログ</h3>
-                    <div style="display: flex; gap: 15px; justify-content: center;">
-                        <a href="#" style="color: #FF120A; text-decoration: none; font-weight: bold;">Instagram</a>
-                        <a href="#" style="color: #FF120A; text-decoration: none; font-weight: bold;">note</a>
-                        <a href="#" style="color: #FF120A; text-decoration: none; font-weight: bold;">Ameblo</a>
+                    <!-- Service B -->
+                    <div class="card-bg rounded-lg p-6 custom-border border-2">
+<h3 class="text-xl font-semibold text-primary mb-4">パーソナルカラー診断</h3>
+<figure class="mx-auto mb-4" style="max-width:375px;">
+  <img
+    src="https://newnormal-creator.com/wp-content/uploads/2025/09/premium_photo-1726768975216-d7dbbc0fe1ce.avif"
+    alt="パーソナルカラー診断（色見本・ドレープのイメージ）"
+    loading="lazy"
+    decoding="async"
+    class="block w-full h-auto rounded-md shadow-md"
+    width="375"
+    style="aspect-ratio:16/9;object-fit:cover;"
+  >
+</figure>
+                        <p class="text-secondary mb-6">
+                            あなたの肌色、瞳の色、髪色を詳しく分析し、最も美しく見える色のグループ（春・夏・秋・冬）を正確に診断いたします。
+                        </p>
+                        <div class="flex space-x-3">
+                            <button class="btn-primary flex-1 py-2 px-4 rounded text-sm">詳しく見る</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- サービス内容ページ -->
-        <div id="services" class="page-content">
-            <div class="container">
-                <a href="#" class="back-button" onclick="showPage('home')">トップに戻る</a>
-                <h2 class="section-title">サービス内容</h2>
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="bg-secondary py-16">
+            <div class="max-w-md mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-bold text-primary mb-4">お客様の声</h2>
+                    <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+                </div>
                 
-                <div class="service-item">
-                    <h3 class="service-title">パーソナルカラー診断</h3>
-                    <p class="service-description">
-                        あなたの肌・瞳・髪の色を詳しく分析し、最も美しく見える色をお伝えします。春・夏・秋・冬の4シーズン、イエローベース・ブルーベースの診断を行います。
-                    </p>
-                    
-                    <div style="background: #fff8f0; border-radius: 10px; padding: 15px; margin: 15px 0;">
-                        <h4 style="color: #FF120A; margin-bottom: 10px;">診断手順</h4>
-                        <ol style="color: #666; padding-left: 20px;">
-                            <li>カウンセリング・お悩みヒアリング</li>
-                            <li>ドレープを使った色合わせ</li>
-                            <li>ベストカラー・避けたい色のご提案</li>
-                            <li>メイクカラーのアドバイス</li>
-                        </ol>
-                    </div>
-
-                    <div class="before-after">
-                        <div>
-                            <div style="background: #f0f0f0; height: 100px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px;">BEFORE画像</div>
-                            <p style="font-size: 12px; text-align: center; margin: 5px 0;">診断前</p>
-                        </div>
-                        <div>
-                            <div style="background: #f0f0f0; height: 100px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px;">AFTER画像</div>
-                            <p style="font-size: 12px; text-align: center; margin: 5px 0;">診断後</p>
-                        </div>
-                    </div>
-
-                    <div style="text-align: center; margin-top: 20px;">
-                        <button class="cta-button" onclick="showPage('contact')" style="font-size: 14px; padding: 12px 25px;">詳しく見る</button>
-                    </div>
-                </div>
-
-                <div class="service-item">
-                    <h3 class="service-title">カフェコンサルティング</h3>
-                    <p class="service-description">
-                        リラックスした雰囲気の中で、お買い物同行やワードローブ整理のご相談を承ります。実際のお洋服を見ながら具体的なアドバイスをいたします。
-                    </p>
-
-                    <div style="background: #fff8f0; border-radius: 10px; padding: 15px; margin: 15px 0;">
-                        <h4 style="color: #FF120A; margin-bottom: 10px;">サービス詳細</h4>
-                        <ul style="color: #666; list-style: none; padding: 0;">
-                            <li style="padding: 5px 0;"><strong>所要時間:</strong> 約2時間</li>
-                            <li style="padding: 5px 0;"><strong>場所:</strong> 都内カフェ（ご相談可）</li>
-                            <li style="padding: 5px 0;"><strong>持ち物:</strong> 診断結果シート、お悩みのアイテム</li>
-                            <li style="padding: 5px 0;"><strong>内容:</strong> 具体的なコーディネート提案</li>
-                        </ul>
-                    </div>
-
-                    <div style="text-align: center; margin-top: 20px;">
-                        <button class="cta-button" onclick="showPage('contact')" style="font-size: 14px; padding: 12px 25px;">ご予約</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- お客様の声ページ -->
-        <div id="voices" class="page-content">
-            <div class="container">
-                <a href="#" class="back-button" onclick="showPage('home')">トップに戻る</a>
-                <h2 class="section-title">お客様の声</h2>
-                
-                <div class="voice-card">
-                    <div class="voice-header">
-                        <div class="voice-avatar">A</div>
-                        <div class="voice-info">
-                            <h4>20代 会社員 Aさん</h4>
-                            <p>お悩み：似合うメイクカラーがわからない</p>
-                        </div>
-                    </div>
-                    <div class="voice-content">
-                        「今まで何となく選んでいたアイシャドウやリップが、実は全然似合っていなかったことがわかって驚きました。診断後は周りから『最近キレイになったね』と褒められることが増えて、メイクするのが楽しくなりました！」
-                    </div>
-                </div>
-
-                <div class="voice-card">
-                    <div class="voice-header">
-                        <div class="voice-avatar">B</div>
-                        <div class="voice-info">
-                            <h4>30代 主婦 Bさん</h4>
-                            <p>お悩み：洋服選びに時間がかかる</p>
-                        </div>
-                    </div>
-                    <div class="voice-content">
-                        「子育てで忙しく、洋服選びに時間をかけられないのが悩みでした。似合う色を教えてもらってからは、迷うことなくお買い物できるように。時短にもなって一石二鳥です！」
-                    </div>
-                </div>
-
-                <div class="voice-card">
-                    <div class="voice-header">
-                        <div class="voice-avatar">C</div>
-                        <div class="voice-info">
-                            <h4>40代 自営業 Cさん</h4>
-                            <p>お悩み：年齢とともに似合う色が変わった気がする</p>
-                        </div>
-                    </div>
-                    <div class="voice-content">
-                        「40代になって今まで着ていた色が似合わなくなった気がしていました。診断を受けて、年齢に関係なく似合う色があることを知り安心しました。新しい自分を発見できて嬉しいです。」
-                    </div>
-                </div>
-
-                <div class="voice-card">
-                    <div class="voice-header">
-                        <div class="voice-avatar">D</div>
-                        <div class="voice-info">
-                            <h4>50代 パート Dさん</h4>
-                            <p>お悩み：顔色が悪く見える</p>
-                        </div>
-                    </div>
-                    <div class="voice-content">
-                        「いつも顔色が悪く見えることが気になっていました。似合う色を身につけるだけで、肌に透明感が出て表情も明るく見えるように。もっと早く診断を受ければよかったです！」
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- お申し込み後の流れページ -->
-        <div id="flow" class="page-content">
-            <div class="container">
-                <a href="#" class="back-button" onclick="showPage('home')">トップに戻る</a>
-                <h2 class="section-title">お申し込み後の流れ</h2>
-                
-                <div class="flow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>ご予約</h3>
-                        <p>まずはご予約フォームからご連絡ください。24時間以内にメールでお返事いたします。ご希望の日時やお悩みをお聞かせください。</p>
-                    </div>
-                </div>
-
-                <div class="flow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>事前ヒアリング</h3>
-                        <p><strong>所要時間：</strong>約15分<br>
-                        お肌のお悩みや普段のメイク・ファッションについてお伺いします。アレルギーや苦手な色などもお聞かせください。</p>
-                    </div>
-                </div>
-
-                <div class="flow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>パーソナルカラー診断</h3>
-                        <p><strong>所要時間：</strong>約90分<br>
-                        <strong>実施場所：</strong>対面（都内サロン）またはオンライン<br>
-                        <strong>持ち物：</strong>普段お使いのファンデーション、髪をまとめるゴム<br>
-                        カラードレープを使って詳しく診断いたします。</p>
-                    </div>
-                </div>
-
-                <div class="flow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>結果のご説明・アドバイス</h3>
-                        <p><strong>所要時間：</strong>約30分<br>
-                        診断結果シートをお渡しし、具体的なメイクカラーやファッションのアドバイスをいたします。お買い物の際の参考資料もご用意。</p>
-                    </div>
-                </div>
-
-                <div class="flow-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h3>アフターフォロー</h3>
-                        <p><strong>期間：</strong>診断後1ヶ月間<br>
-                        お買い物での迷いや新しい発見など、LINEやメールでお気軽にご相談いただけます。より良い色選びをサポートいたします。</p>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="cta-button" onclick="showPage('contact')">ご予約はこちら</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 料金体系ページ -->
-        <div id="pricing" class="page-content">
-            <div class="container">
-                <a href="#" class="back-button" onclick="showPage('home')">トップに戻る</a>
-                <h2 class="section-title">料金体系</h2>
-                
-                <div class="price-table">
-                    <h3 style="color: #FF120A; margin-bottom: 20px; text-align: center;">基本メニュー</h3>
-                    <div class="price-item">
-                        <div>
-                            <div class="price-name">パーソナルカラー診断</div>
-                            <div style="font-size: 12px; color: #666;">所要時間：約2時間</div>
-                        </div>
-                        <div class="price-value">¥15,000</div>
-                    </div>
-                    <div class="price-item">
-                        <div>
-                            <div class="price-name">カフェコンサルティング</div>
-                            <div style="font-size: 12px; color: #666;">所要時間：約2時間</div>
-                        </div>
-                        <div class="price-value">¥8,000</div>
-                    </div>
-                </div>
-
-                <div class="price-table">
-                    <h3 style="color: #FF120A; margin-bottom: 20px; text-align: center;">セットメニュー</h3>
-                    <div class="price-item">
-                        <div>
-                            <div class="price-name">診断＋コンサルティングセット</div>
-                            <div style="font-size: 12px; color: #666;">通常¥23,000 → セット価格</div>
-                        </div>
-                        <div class="price-value">¥20,000</div>
-                    </div>
-                </div>
-
-                <div class="price-table">
-                    <h3 style="color: #FF120A; margin-bottom: 20px; text-align: center;">オプション</h3>
-                    <div class="price-item">
-                        <div>
-                            <div class="price-name">お買い物同行</div>
-                            <div style="font-size: 12px; color: #666;">3時間まで・交通費別途</div>
-                        </div>
-                        <div class="price-value">¥12,000</div>
-                    </div>
-                    <div class="price-item">
-                        <div>
-                            <div class="price-name">ワードローブ整理</div>
-                            <div style="font-size: 12px; color: #666;">ご自宅訪問・3時間まで</div>
-                        </div>
-                        <div class="price-value">¥15,000</div>
-                    </div>
-                </div>
-
-                <div style="background: #fff8f0; border-radius: 15px; padding: 20px; margin: 25px 0;">
-                    <h4 style="color: #FF120A; margin-bottom: 10px;">料金に含まれるもの</h4>
-                    <ul style="color: #666; list-style: none; padding: 0;">
-                        <li style="padding: 3px 0;">✓ 詳細な診断結果シート</li>
-                        <li style="padding: 3px 0;">✓ おすすめカラーチャート</li>
-                        <li style="padding: 3px 0;">✓ 1ヶ月間のアフターフォロー</li>
-                        <li style="padding: 3px 0;">✓ お買い物参考資料</li>
-                    </ul>
-                </div>
-
-                <div style="background: #fff; border: 2px solid #FFE082; border-radius: 15px; padding: 20px; margin: 25px 0;">
-                    <h4 style="color: #FF120A; margin-bottom: 10px;">お支払い方法</h4>
-                    <p style="color: #666; font-size: 14px; line-height: 1.5;">
-                        銀行振込（事前払い）またはPayPay・現金（当日払い）<br>
-                        ※キャンセル料：3日前まで無料、前日50%、当日100%
-                    </p>
-                </div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="cta-button" onclick="showPage('contact')">ご予約</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- FAQ ページ -->
-        <div id="faq" class="page-content">
-            <div class="container">
-                <a href="#" class="back-button" onclick="showPage('home')">トップに戻る</a>
-                <h2 class="section-title">よくあるご質問</h2>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        診断にはどのくらい時間がかかりますか？
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer open">
-                        パーソナルカラー診断は約2時間程度を予定しております。事前ヒアリング、実際の診断、結果のご説明とアドバイスを含めた時間です。お客様のペースに合わせて進めますので、お時間に余裕を持ってお越しください。
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        顔出しは必要ですか？
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer open">
-                        診断には お顔を拝見させていただく必要がございますが、SNS等への掲載は一切いたしません。オンライン診断の場合も、録画などは行わず、診断中のみお顔を拝見させていただきます。プライバシーには十分配慮いたします。
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        オンラインでも正確に診断できますか？
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer open">
-                        はい、可能です。事前に照明環境や画面設定についてご案内いたします。オンライン専用の診断方法を採用しており、対面診断と同等の精度で診断いたします。遠方の方にもご好評いただいております。
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        どのような支払い方法がありますか？
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        事前振込（ゆうちょ銀行・楽天銀行）、当日現金払い、PayPayでのお支払いが可能です。事前振込の場合は割引特典もございますので、詳しくはご予約時にご案内いたします。
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        キャンセルはできますか？
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        ご予約日の3日前まででしたら無料でキャンセル・変更が可能です。前日のキャンセルは料金の50%、当日キャンセルは100%のキャンセル料をいただいております。急なご体調不良等の場合はご相談ください。
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        男性でも診断を受けられますか？
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        申し訳ございませんが、現在は女性のお客様のみとさせていただいております。女性専用サロンでの実施のため、ご理解いただけますようお願いいたします。
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        診断結果に納得できない場合は？
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        診断後1週間以内でしたら、無料で再診断いたします。お客様にご納得いただけるまで丁寧にご説明させていただきますので、遠慮なくお申し出ください。
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ご予約ページ -->
-        <div id="contact" class="page-content">
-            <div class="container">
-                <a href="#" class="back-button" onclick="showPage('home')">トップに戻る</a>
-                <h2 class="section-title">ご予約</h2>
-                
-                <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(255, 18, 10, 0.1);">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">お名前<span class="required">必須</span></label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="kana">ふりがな<span class="required">必須</span></label>
-                            <input type="text" id="kana" name="kana" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">メールアドレス<span class="required">必須</span></label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">お電話番号<span class="required">必須</span></label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="date1">ご希望日時（第1希望）</label>
-                            <input type="datetime-local" id="date1" name="date1">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="date2">ご希望日時（第2希望）</label>
-                            <input type="datetime-local" id="date2" name="date2">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="date3">ご希望日時（第3希望）</label>
-                            <input type="datetime-local" id="date3" name="date3">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="method">ご希望の実施方法</label>
-                            <select id="method" name="method">
-                                <option value="">選択してください</option>
-                                <option value="offline">対面診断</option>
-                                <option value="online">オンライン診断</option>
-                                <option value="either">どちらでも可</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">ご相談内容・ご質問など</label>
-                            <textarea id="message" name="message" placeholder="お悩みやご質問がございましたらお聞かせください"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="privacy" name="privacy" required>
-                                <label for="privacy">
-                                    <a href="#" onclick="showPage('privacy')" style="color: #FF120A;">プライバシーポリシー</a>に同意する<span class="required">必須</span>
-                                </label>
+                <div class="space-y-6">
+                    <div class="bg-primary rounded-lg p-6 shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 accent-bg rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                A
+                            </div>
+                            <div>
+                                <div class="font-semibold text-primary">40代 会社員</div>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
                             </div>
                         </div>
-
-                        <div style="text-align: center; margin-top: 25px;">
-                            <button type="submit" class="cta-button">送信する</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- サンクスページ -->
-        <div id="thanks" class="page-content">
-            <div class="container">
-                <div style="text-align: center; padding: 40px 20px;">
-                    <div style="font-size: 60px; margin-bottom: 20px;">✉️</div>
-                    <h2 style="color: #FF120A; font-size: 24px; margin-bottom: 20px;">ご予約ありがとうございます</h2>
-                    
-                    <div style="background: white; border-radius: 15px; padding: 25px; margin: 25px 0; box-shadow: 0 4px 15px rgba(255, 18, 10, 0.1);">
-                        <p style="line-height: 1.6; color: #333;">
-                            この度はご予約いただき、ありがとうございます。<br><br>
-                            
-                            24時間以内にご記入いただいたメールアドレス宛に、詳細をご連絡いたします。<br><br>
-                            
-                            しばらくお待ちいただいてもメールが届かない場合は、迷惑メールフォルダもご確認ください。<br><br>
-                            
-                            診断当日は以下をご持参ください：<br>
-                            • 普段お使いのファンデーション<br>
-                            • 髪をまとめるゴム・ヘアクリップ<br>
-                            • 診断結果を記録するメモ
+                        <p class="text-secondary text-sm mb-3">
+                            <span class="font-semibold">お悩み：</span>年齢とともに似合う色がわからなくなった
+                        </p>
+                        <p class="text-secondary text-sm">
+                            <span class="font-semibold">効果：</span>診断後、周りから「若々しくなった」「おしゃれになった」と言われるようになりました。自分に自信が持てるようになり、毎日のコーディネートが楽しくなりました。
                         </p>
                     </div>
 
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 30px;">
-                        <button class="cta-button" onclick="showPage('home')" style="background: #666; font-size: 14px; padding: 12px 20px;">トップに戻る</button>
-                        <button class="cta-button" onclick="showPage('faq')" style="font-size: 14px; padding: 12px 20px;">FAQを見る</button>
+                    <div class="bg-primary rounded-lg p-6 shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 accent-bg rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                B
+                            </div>
+                            <div>
+                                <div class="font-semibold text-primary">50代 主婦</div>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-secondary text-sm mb-3">
+                            <span class="font-semibold">お悩み：</span>メイクやファッションがマンネリ化
+                        </p>
+                        <p class="text-secondary text-sm">
+                            <span class="font-semibold">効果：</span>新しい自分を発見できました。似合う色を知ることで、少ないアイテムでも上品で洗練された印象を作れるようになりました。
+                        </p>
+                    </div>
+
+                    <div class="bg-primary rounded-lg p-6 shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 accent-bg rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                C
+                            </div>
+                            <div>
+                                <div class="font-semibold text-primary">45代 自営業</div>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-secondary text-sm mb-3">
+                            <span class="font-semibold">お悩み：</span>お客様との打ち合わせ時の第一印象を良くしたい
+                        </p>
+                        <p class="text-secondary text-sm">
+                            <span class="font-semibold">効果：</span>ビジネスシーンでも活用できる色選びのコツを教えていただき、信頼感のある印象を与えられるようになりました。
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- プライバシーポリシーページ -->
-        <div id="privacy" class="page-content">
-            <div class="container">
-                <a href="#" class="back-button" onclick="showPage('home')">トップに戻る</a>
-                <h2 class="section-title">プライバシーポリシー</h2>
+        <!-- Process Section -->
+        <section id="process" class="py-16">
+            <div class="max-w-md mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-bold text-primary mb-4">お申し込み後の流れ</h2>
+                    <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+                </div>
                 
-                <div style="background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(255, 18, 10, 0.1);">
-                    <h3 style="color: #FF120A; margin-bottom: 15px;">個人情報の取得について</h3>
-                    <p style="line-height: 1.6; color: #333; margin-bottom: 20px;">
-                        当サービスでは、お客様からご予約やサービスお申し込みの際に、お名前、メールアドレス、お電話番号等の個人情報をご提供いただく場合があります。
-                    </p>
+                <div class="space-y-8">
+                    <div class="flex items-start space-x-4">
+                        <div class="step-number">1</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-primary mb-2">お問い合わせ</h3>
+                            <p class="text-secondary text-sm mb-2">お電話またはメールにてお気軽にお問い合わせください。</p>
+                            <div class="text-xs text-secondary">
+                                <i class="fas fa-clock mr-1"></i>所要時間：5分
+                            </div>
+                        </div>
+                    </div>
 
-                    <h3 style="color: #FF120A; margin-bottom: 15px;">個人情報の利用目的</h3>
-                    <ul style="line-height: 1.6; color: #333; margin-bottom: 20px; padding-left: 20px;">
-                        <li>サービスの提供・運営のため</li>
-                        <li>お客様からのご予約に回答するため</li>
-                        <li>サービスに関する重要なお知らせをお送りするため</li>
-                        <li>サービス向上・改善のため</li>
-                    </ul>
+                    <div class="flex items-start space-x-4">
+                        <div class="step-number">2</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-primary mb-2">事前ヒアリング</h3>
+                            <p class="text-secondary text-sm mb-2">お悩みやご希望を詳しくお伺いし、最適なプランをご提案いたします。</p>
+                            <div class="text-xs text-secondary">
+                                <i class="fas fa-clock mr-1"></i>所要時間：15分　<i class="fas fa-map-marker-alt mr-1 ml-3"></i>お電話・オンライン
+                            </div>
+                        </div>
+                    </div>
 
-                    <h3 style="color: #FF120A; margin-bottom: 15px;">個人情報の第三者提供</h3>
-                    <p style="line-height: 1.6; color: #333; margin-bottom: 20px;">
-                        お客様の同意がある場合や、法令に基づく場合を除き、取得した個人情報を第三者に提供することはありません。
-                    </p>
+                    <div class="flex items-start space-x-4">
+                        <div class="step-number">3</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-primary mb-2">診断実施</h3>
+                            <p class="text-secondary text-sm mb-2">専用ドレープを使用した本格的なパーソナルカラー診断を行います。</p>
+                            <div class="text-xs text-secondary">
+                                <i class="fas fa-clock mr-1"></i>所要時間：90分　<i class="fas fa-map-marker-alt mr-1 ml-3"></i>対面・オンライン対応
+                            </div>
+                        </div>
+                    </div>
 
-                    <h3 style="color: #FF120A; margin-bottom: 15px;">個人情報の保管期間</h3>
-                    <p style="line-height: 1.6; color: #333; margin-bottom: 20px;">
-                        個人情報は、利用目的の達成に必要な期間のみ保管し、その後は適切に廃棄いたします。
-                    </p>
+                    <div class="flex items-start space-x-4">
+                        <div class="step-number">4</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-primary mb-2">アドバイス</h3>
+                            <p class="text-secondary text-sm mb-2">診断結果に基づいた具体的なコーディネートやメイクのアドバイスをいたします。</p>
+                            <div class="text-xs text-secondary">
+                                <i class="fas fa-clock mr-1"></i>所要時間：30分
+                            </div>
+                        </div>
+                    </div>
 
-                    <h3 style="color: #FF120A; margin-bottom: 15px;">ご予約窓口</h3>
-                    <p style="line-height: 1.6; color: #333;">
-                        個人情報の取り扱いに関するご予約は、ご予約フォームよりご連絡ください。
-                    </p>
+                    <div class="flex items-start space-x-4">
+                        <div class="step-number">5</div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-primary mb-2">アフター相談</h3>
+                            <p class="text-secondary text-sm mb-2">診断後のご質問やお悩みに、1ヶ月間無料でお答えいたします。</p>
+                            <div class="text-xs text-secondary">
+                                <i class="fas fa-clock mr-1"></i>期間：1ヶ月間　<i class="fas fa-envelope mr-1 ml-3"></i>メール・LINE対応
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="bg-secondary py-16">
+            <div class="max-w-md mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-bold text-primary mb-4">料金体系</h2>
+                    <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-primary rounded-lg p-6 shadow-lg custom-border border-2">
+                        <div class="text-center mb-4">
+                            <h3 class="text-xl font-semibold text-primary mb-2">カフェコンサルティングプラン</h3>
+                            <div class="text-3xl font-bold accent-text">¥7,000</div>
+                            <div class="text-sm text-secondary">（税込）</div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-secondary mb-6">
+                            <li class="flex items-center"><i class="fas fa-check accent-text mr-2"></i>カフェでまずはお気軽にトークをしながら診断内容のご説明（90分）</li>
+                            <li class="flex items-center"><i class="fas fa-check accent-text mr-2"></i>まずは会ってみたいというかたにおすすめ4</li>
+                            <li class="flex items-center"><i class="fas fa-check accent-text mr-2"></i>お悩みなどを聞いてアドバイスいたします</li>
+                        </ul>
+                        <button class="btn-primary w-full py-3 rounded-lg">詳細を見る</button>
+                    </div>
+
+                    <div class="bg-primary rounded-lg p-6 shadow-lg custom-border border-2">
+                        <div class="text-center mb-4">
+                            <h3 class="text-xl font-semibold text-primary mb-2">総合コンサルティングプラン</h3>
+                            <div class="text-3xl font-bold accent-text">¥300,000</div>
+                            <div class="text-sm text-secondary">（税込）</div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-secondary mb-6">
+                            <li class="flex items-center"><i class="fas fa-check accent-text mr-2"></i>本格的なパーソナルカラー診断を実施</li>
+                            <li class="flex items-center"><i class="fas fa-check accent-text mr-2"></i>原宿のサロンでビフォーアフター確認用の写真撮影</li>
+                            <li class="flex items-center"><i class="fas fa-check accent-text mr-2"></i>コーディネートに合うアイテムを一緒にお買い物</li>
+                            <li class="flex items-center"><i class="fas fa-check accent-text mr-2"></i>ご相談をいただき次第、適宜アドバイスも実施</li>
+                            <li class="flex items-center"><i class="fas fa-check accent-text mr-2"></i>ショッピング同行（2時間）</li>
+                        </ul>
+                        <button class="btn-primary w-full py-3 rounded-lg">詳細を見る</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-16">
+            <div class="max-w-md mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-bold text-primary mb-4">よくあるご質問</h2>
+                    <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="card-bg rounded-lg custom-border border">
+                        <button class="w-full p-4 text-left flex justify-between items-center" onclick="toggleFAQ(0)">
+                            <span class="font-semibold text-primary">診断にはどれくらい時間がかかりますか？</span>
+                            <i class="fas fa-chevron-down text-secondary"></i>
+                        </button>
+                        <div class="faq-content px-4 pb-4 text-secondary text-sm hidden">
+                            回答内容1
+                        </div>
+                    </div>
+
+                    <div class="card-bg rounded-lg custom-border border">
+                        <button class="w-full p-4 text-left flex justify-between items-center" onclick="toggleFAQ(1)">
+                            <span class="font-semibold text-primary">顔出しは必要ですか？</span>
+                            <i class="fas fa-chevron-down text-secondary"></i>
+                        </button>
+                        <div class="faq-content px-4 pb-4 text-secondary text-sm hidden">
+                            回答内容2
+                        </div>
+                    </div>
+
+                    <div class="card-bg rounded-lg custom-border border">
+                        <button class="w-full p-4 text-left flex justify-between items-center" onclick="toggleFAQ(2)">
+                            <span class="font-semibold text-primary">対面での診断エリアはどこまで可能ですか？</span>
+                            <i class="fas fa-chevron-down text-secondary"></i>
+                        </button>
+                        <div class="faq-content px-4 pb-4 text-secondary text-sm hidden">
+                            回答内容3
+                        </div>
+                    </div>
+
+                    <div class="card-bg rounded-lg custom-border border">
+                        <button class="w-full p-4 text-left flex justify-between items-center" onclick="toggleFAQ(3)">
+                            <span class="font-semibold text-primary">支払い方法を教えてください</span>
+                            <i class="fas fa-chevron-down text-secondary"></i>
+                        </button>
+                        <div class="faq-content px-4 pb-4 text-secondary text-sm hidden">
+                            回答内容4
+                        </div>
+                    </div>
+
+                    <div class="card-bg rounded-lg custom-border border">
+                        <button class="w-full p-4 text-left flex justify-between items-center" onclick="toggleFAQ(4)">
+                            <span class="font-semibold text-primary">キャンセルは可能ですか？</span>
+                            <i class="fas fa-chevron-down text-secondary"></i>
+                        </button>
+                        <div class="faq-content px-4 pb-4 text-secondary text-sm hidden">
+                            回答内容5
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-secondary pt-16 pb-6">
+            <div class="max-w-md mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-bold text-primary mb-4">ご予約はこちら</h2>
+                    <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+                    <!--<p class="text-secondary mt-6">
+                        ご質問・ご相談はお気軽にお問い合わせください
+                    </p>-->
+                </div>
+                
+                <div class="bg-primary rounded-lg p-6 shadow-lg">
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">お名前 <span class="text-red-500">*</span></label>
+                            <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500" placeholder="山田 花子">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">ふりがな <span class="text-red-500">*</span></label>
+                            <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500" placeholder="やまだ はなこ">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">メールアドレス <span class="text-red-500">*</span></label>
+                            <input type="email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500" placeholder="example@email.com">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">電話番号</label>
+                            <input type="tel" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500" placeholder="090-1234-5678">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">ご希望日（第1希望）</label>
+                            <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">ご希望日（第2希望）</label>
+                            <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">ご希望日（第3希望）</label>
+                            <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-primary mb-2">ご相談内容・ご質問</label>
+                            <textarea rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500" placeholder="お気軽にご相談ください"></textarea>
+                        </div>
+                        
+                        <div class="flex items-start space-x-2">
+                            <input type="checkbox" id="privacy" class="mt-1">
+                            <label for="privacy" class="text-xs text-secondary">
+                                <a href="#" class="accent-text underline">プライバシーポリシー</a>に同意します <span class="text-red-500">*</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full py-4 rounded-lg text-lg font-semibold">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            送信する
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- 固定フッターCTA -->
-    <div class="fixed-footer">
-        <!--<a href="#" class="footer-btn menu" id="footerMenu">
-            <div>📱</div>
-            <div>メニュー</div>
-        </a>-->
-        <a href="#" class="footer-btn contact" onclick="showPage('contact')">
-            <div>✉️</div>
-            <div>ご予約</div>
-        </a>
+<footer class="bg-primary border-t custom-border mt-0">
+  <div class="max-w-md mx-auto px-4 py-8">
+    <!-- ロゴ＆サイト名 -->
+    <div class="flex items-center justify-center space-x-3 mb-4">
+      <div class="logo-svg w-10 h-10">
+        <!-- ヘッダーと同じSVGロゴを再利用 -->
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+          <ellipse cx="100" cy="35" rx="15" ry="30" fill="#FF120A" opacity="0.9"/>
+          <ellipse cx="165" cy="100" rx="30" ry="15" fill="#FFC107" opacity="0.9"/>
+          <ellipse cx="100" cy="165" rx="15" ry="30" fill="#FF120A" opacity="0.9"/>
+          <ellipse cx="35" cy="100" rx="30" ry="15" fill="#FFC107" opacity="0.9"/>
+          <ellipse cx="138" cy="62" rx="12" ry="25" fill="#FF9800" transform="rotate(45 138 62)"/>
+          <ellipse cx="138" cy="138" rx="12" ry="25" fill="#FF9800" transform="rotate(-45 138 138)"/>
+          <ellipse cx="62" cy="138" rx="12" ry="25" fill="#FF9800" transform="rotate(45 62 138)"/>
+          <ellipse cx="62" cy="62" rx="12" ry="25" fill="#FF9800" transform="rotate(-45 62 62)"/>
+          <ellipse cx="100" cy="55" rx="8" ry="20" fill="#FFB74D" opacity="0.8"/>
+          <ellipse cx="145" cy="100" rx="20" ry="8" fill="#FFB74D" opacity="0.8"/>
+          <ellipse cx="100" cy="145" rx="8" ry="20" fill="#FFB74D" opacity="0.8"/>
+          <ellipse cx="55" cy="100" rx="20" ry="8" fill="#FFB74D" opacity="0.8"/>
+          <ellipse cx="118" cy="82" rx="6" ry="15" fill="#FFE082" transform="rotate(45 118 82)"/>
+          <ellipse cx="118" cy="118" rx="6" ry="15" fill="#FFE082" transform="rotate(-45 118 118)"/>
+          <ellipse cx="82" cy="118" rx="6" ry="15" fill="#FFE082" transform="rotate(45 82 118)"/>
+          <ellipse cx="82" cy="82" rx="6" ry="15" fill="#FFE082" transform="rotate(-45 82 82)"/>
+          <circle cx="100" cy="100" r="25" fill="#FF120A"/>
+          <circle cx="95" cy="90" r="8" fill="#FFEB3B" opacity="0.9"/>
+          <circle cx="90" cy="85" r="4" fill="#FFF9C4" opacity="0.7"/>-->
+        </svg>
+      </div>
+      <span class="text-sm font-semibold">輝装心コーディネーター</span>
     </div>
 
+    <!-- 外部リンク -->
+    <div class="flex items-center justify-center space-x-8">
+      <!-- BASE -->
+      <a href="https://amion822.base.shop/" target="_blank" rel="noopener" 
+         class="text-primary hover:accent-text inline-flex items-center space-x-2" aria-label="BASEショップ">
+        <i class="fas fa-store text-xl"></i><span class="text-sm">BASE</span>
+      </a>
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/shikisailc822" target="_blank" rel="noopener" 
+         class="text-primary hover:accent-text inline-flex items-center space-x-2" aria-label="Instagram">
+        <i class="fab fa-instagram text-xl"></i><span class="text-sm">Instagram</span>
+      </a>
+<!-- note -->
+<a href="https://note.com/ginza1107" target="_blank" rel="noopener"
+   class="text-primary hover:accent-text inline-flex items-center space-x-2" aria-label="note">
+  <i class="fas fa-pen-nib text-xl"></i><span class="text-sm">note</span>
+</a>
+    </div>
+    <p class="text-center text-secondary text-xs mt-4">
+      &copy; <span id="footer-year"></span> Kisoushin Coordinator
+    </p>
+  </div>
+</footer>
+
+    <!-- Fixed Footer CTA -->
+<!--    <div class="fixed-footer flex">
+        <button onclick="toggleMenu()" class="flex-1 h-full flex items-center justify-center bg-secondary text-primary">
+            <i class="fas fa-bars mr-2"></i>
+            <span class="text-sm font-semibold">メニュー</span>
+        </button>
+        <button onclick="scrollToContact()" class="flex-1 h-full btn-primary flex items-center justify-center">
+            <i class="fas fa-calendar-plus mr-2"></i>
+            <span class="text-sm font-semibold">お問い合わせ</span>
+        </button>
+    </div>-->
+
     <script>
-        // ページ切り替え機能
-        function showPage(pageId) {
-            // 全てのページを非表示
-            const pages = document.querySelectorAll('.page-content');
-            pages.forEach(page => {
-                page.classList.remove('active');
-            });
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const isOrange = body.classList.contains('theme-orange');
             
-            // 指定されたページを表示
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-                window.scrollTo(0, 0);
+            if (isOrange) {
+                body.classList.remove('theme-orange');
+                body.classList.add('theme-brown');
+            } else {
+                body.classList.remove('theme-brown');
+                body.classList.add('theme-orange');
             }
+        }
+
+        // Hamburger menu functionality
+        function toggleMenu() {
+            const menu = document.getElementById('hamburgerMenu');
+            menu.classList.toggle('active');
             
-            // メニューを閉じる
-            closeMenu();
+            if (menu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
         }
 
-        // ハンバーガーメニュー機能
-        const hamburger = document.getElementById('hamburger');
-        const overlayMenu = document.getElementById('overlayMenu');
-        const menuClose = document.getElementById('menuClose');
-        const footerMenu = document.getElementById('footerMenu');
-
-        function openMenu() {
-            overlayMenu.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            hamburger.setAttribute('aria-expanded', 'true');
-        }
-
-        function closeMenu() {
-            overlayMenu.classList.remove('active');
-            document.body.style.overflow = '';
-            hamburger.setAttribute('aria-expanded', 'false');
-        }
-
-        hamburger.addEventListener('click', openMenu);
-        menuClose.addEventListener('click', closeMenu);
-        footerMenu.addEventListener('click', function(e) {
-            e.preventDefault();
-            openMenu();
+        // Close menu when clicking outside or pressing escape
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('hamburgerMenu');
+            const hamburgerBtn = document.querySelector('.hamburger-btn');
+            
+            if (menu.classList.contains('active') && !menu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+                toggleMenu();
+            }
         });
 
-        // ESCキーでメニューを閉じる
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                closeMenu();
+                const menu = document.getElementById('hamburgerMenu');
+                if (menu.classList.contains('active')) {
+                    toggleMenu();
+                }
             }
         });
 
-        // FAQ機能
-        function toggleFAQ(element) {
-            const answer = element.nextElementSibling;
-            const toggle = element.querySelector('.faq-toggle');
-            
-            if (answer.classList.contains('open')) {
-                answer.classList.remove('open');
-                toggle.classList.remove('open');
-                toggle.textContent = '▼';
-            } else {
-                answer.classList.add('open');
-                toggle.classList.add('open');
-                toggle.textContent = '▲';
-            }
-        }
-
-        // フォーム送信処理
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // バリデーション
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const privacy = document.getElementById('privacy').checked;
-
-            if (!name || !email || !phone || !privacy) {
-                alert('必須項目をすべて入力してください。');
-                return;
-            }
-
-            // メールアドレスの簡単な検証
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('正しいメールアドレスを入力してください。');
-                return;
-            }
-
-            // 送信完了ページを表示
-            showPage('thanks');
-        });
-
-        // 初期化
-        document.addEventListener('DOMContentLoaded', function() {
-            // 初期状態でトップページを表示
-            showPage('home');
-            
-            // 最初のFAQ項目を開いた状態にする
-            const firstFAQs = document.querySelectorAll('.faq-answer');
-            firstFAQs.forEach((faq, index) => {
-                if (index < 3) { // 最初の3つを開く
-                    faq.classList.add('open');
-                    const toggle = faq.previousElementSibling.querySelector('.faq-toggle');
-                    toggle.classList.add('open');
-                    toggle.textContent = '▲';
+        // Smooth scroll to sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close menu if open
+                    const menu = document.getElementById('hamburgerMenu');
+                    if (menu.classList.contains('active')) {
+                        toggleMenu();
+                    }
                 }
             });
         });
 
-        // スムーズスクロール
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        // FAQ toggle functionality
+        function toggleFAQ(index) {
+            const faqItems = document.querySelectorAll('.faq-content');
+            const chevrons = document.querySelectorAll('.fa-chevron-down');
+            
+            faqItems[index].classList.toggle('hidden');
+            chevrons[index].classList.toggle('rotate-180');
+        }
+
+        // Scroll to contact section
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             });
         }
 
-        // 外部リンク用の関数（実際のSNSリンクが設定される場合）
-        function openExternalLink(url) {
-            window.open(url, '_blank', 'noopener,noreferrer');
-        }
+        // Initialize - Show first 3 FAQ items
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-content');
+            for (let i = 0; i < 3 && i < faqItems.length; i++) {
+                faqItems[i].classList.remove('hidden');
+            }
+        });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const faqItems = document.querySelectorAll('.faq-content');
+  for (let i = 0; i < 3 && i < faqItems.length; i++) {
+      faqItems[i].classList.remove('hidden');
+  }
+  // ▼ フッター年号
+  const fy = document.getElementById('footer-year');
+  if (fy) fy.textContent = new Date().getFullYear();
+});
+
     </script>
 </body>
 </html>
