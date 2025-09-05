@@ -230,7 +230,7 @@
             <div class="flex items-center space-x-3">
                 <div class="logo-svg w-10 h-10">
   <img
-    src="https://newnormal-creator.com/wp-content/uploads/2025/09/Gemini_Generated_Image_kx7tnqkx7tnqkx7t-removebg-preview.png"
+    src="https://newnormal-creator.com/wp-content/uploads/2025/09/Gemini_Generated_Image_nn3buknn3buknn3b1-removebg-preview.png"
     alt="輝装心コーディネーター ロゴ"
     class="w-full h-full object-contain"
     width="40" height="40"
@@ -304,7 +304,7 @@
                     本来の美しさを引き出すサポートをいたします。
                 </p>
                 <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold shadow-lg">
-                    相談を予約する
+                    予約する
                 </button>
             </div>
         </section>
@@ -639,51 +639,52 @@
                 <div class="space-y-4">
                     <div class="card-bg rounded-lg custom-border border">
                         <button class="w-full p-4 text-left flex justify-between items-center" onclick="toggleFAQ(0)">
-                            <span class="font-semibold text-primary">診断にはどれくらい時間がかかりますか？</span>
-                            <i class="fas fa-chevron-down text-secondary"></i>
+                            <span class="font-semibold text-primary">実際のレッスンは、何回ありますか？</span>
+                            <i class="fas fa-chevron-down text-secondary transform transition-transform duration-200"></i>
                         </button>
                         <div class="faq-content px-4 pb-4 text-secondary text-sm hidden">
-                            回答内容1
+                            トータルで5回です。
                         </div>
                     </div>
 
                     <div class="card-bg rounded-lg custom-border border">
                         <button class="w-full p-4 text-left flex justify-between items-center" onclick="toggleFAQ(1)">
-                            <span class="font-semibold text-primary">顔出しは必要ですか？</span>
-                            <i class="fas fa-chevron-down text-secondary"></i>
+                            <span class="font-semibold text-primary">診断の場所は、原宿のみですか？</span>
+                            <i class="fas fa-chevron-down text-secondary transform transition-transform duration-200"></i>
                         </button>
                         <div class="faq-content px-4 pb-4 text-secondary text-sm hidden">
-                            回答内容2
+                            色の識別に必要な太陽光の入りが理想的なプライベートサロンで行います。
                         </div>
                     </div>
 
                     <div class="card-bg rounded-lg custom-border border">
                         <button class="w-full p-4 text-left flex justify-between items-center" onclick="toggleFAQ(2)">
-                            <span class="font-semibold text-primary">対面での診断エリアはどこまで可能ですか？</span>
-                            <i class="fas fa-chevron-down text-secondary"></i>
+                            <span class="font-semibold text-primary">手持ちの服などを断捨離したい場合、出張して頂くとは可能ですか？</span>
+                            <i class="fas fa-chevron-down text-secondary transform transition-transform duration-200"></i>
                         </button>
                         <div class="faq-content px-4 pb-4 text-secondary text-sm hidden">
-                            回答内容3
+                            総合レッスン修了後にご相談ください。
                         </div>
                     </div>
 
                     <div class="card-bg rounded-lg custom-border border">
                         <button class="w-full p-4 text-left flex justify-between items-center" onclick="toggleFAQ(3)">
                             <span class="font-semibold text-primary">支払い方法を教えてください</span>
-                            <i class="fas fa-chevron-down text-secondary"></i>
+                            <i class="fas fa-chevron-down text-secondary transform transition-transform duration-200"></i>
                         </button>
                         <div class="faq-content px-4 pb-4 text-secondary text-sm hidden">
-                            回答内容4
+                            予約確定後、3日以内に以下の方法にてお支払い下さい。<br>
+                            クレジットカード決済、銀行振込
                         </div>
                     </div>
 
                     <div class="card-bg rounded-lg custom-border border">
                         <button class="w-full p-4 text-left flex justify-between items-center" onclick="toggleFAQ(4)">
-                            <span class="font-semibold text-primary">キャンセルは可能ですか？</span>
-                            <i class="fas fa-chevron-down text-secondary"></i>
+                            <span class="font-semibold text-primary">キャンセル料はかかりますか？</span>
+                            <i class="fas fa-chevron-down text-secondary transform transition-transform duration-200"></i>
                         </button>
                         <div class="faq-content px-4 pb-4 text-secondary text-sm hidden">
-                            回答内容5
+                            3日前までは無料、前日50%、当日100%となります。
                         </div>
                     </div>
                 </div>
@@ -766,7 +767,7 @@
         <!-- ヘッダーと同じSVGロゴを再利用 -->
         <div class="logo-svg w-10 h-10">
   <img
-    src="https://newnormal-creator.com/wp-content/uploads/2025/09/Gemini_Generated_Image_kx7tnqkx7tnqkx7t-removebg-preview.png"
+    src="https://newnormal-creator.com/wp-content/uploads/2025/09/Gemini_Generated_Image_nn3buknn3buknn3b1-removebg-preview.png"
     alt="輝装心コーディネーター ロゴ"
     class="w-full h-full object-contain"
     width="40" height="40"
@@ -901,13 +902,31 @@
         });
 
         // FAQ toggle functionality
-        function toggleFAQ(index) {
-            const faqItems = document.querySelectorAll('.faq-content');
-            const chevrons = document.querySelectorAll('.fa-chevron-down');
-            
-            faqItems[index].classList.toggle('hidden');
-            chevrons[index].classList.toggle('rotate-180');
-        }
+  function toggleFAQ(index) {
+    const faqItems  = document.querySelectorAll('.faq-content');
+    const chevrons  = document.querySelectorAll('.card-bg .fa-chevron-down');
+    const buttons   = document.querySelectorAll('.card-bg button');
+
+    const content = faqItems[index];
+    const icon    = chevrons[index];
+    const button  = buttons[index];
+
+    const willOpen = content.classList.contains('hidden');
+
+    // 開閉
+    content.classList.toggle('hidden');
+
+    // アイコン回転
+    if (willOpen) {
+      icon.classList.add('rotate-180');
+    } else {
+      icon.classList.remove('rotate-180');
+    }
+
+    // アクセシビリティ（任意だが推奨）
+    if (button) button.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    content.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
+  }
 
         // Scroll to contact section
         function scrollToContact() {
@@ -917,23 +936,28 @@
             });
         }
 
-        // Initialize - Show first 3 FAQ items
-        document.addEventListener('DOMContentLoaded', function() {
-            const faqItems = document.querySelectorAll('.faq-content');
-            for (let i = 0; i < 3 && i < faqItems.length; i++) {
-                faqItems[i].classList.remove('hidden');
-            }
-        });
+document.addEventListener('DOMContentLoaded', function () {
+  // すべて閉じる（表示＝非表示）
+  document.querySelectorAll('.faq-content').forEach(el => {
+    el.classList.add('hidden');
+    el.setAttribute('aria-hidden', 'true');
+  });
 
-document.addEventListener('DOMContentLoaded', function() {
-  const faqItems = document.querySelectorAll('.faq-content');
-  for (let i = 0; i < 3 && i < faqItems.length; i++) {
-      faqItems[i].classList.remove('hidden');
-  }
-  // ▼ フッター年号
+  // すべてのボタンを「閉じている」状態に
+  document.querySelectorAll('.card-bg button').forEach(btn => {
+    btn.setAttribute('aria-expanded', 'false');
+  });
+
+  // すべての矢印を初期向きに（下向き）
+  document.querySelectorAll('.card-bg .fa-chevron-down').forEach(icon => {
+    icon.classList.remove('rotate-180');
+  });
+
+  // フッター年号
   const fy = document.getElementById('footer-year');
   if (fy) fy.textContent = new Date().getFullYear();
 });
+
 
     </script>
 </body>
