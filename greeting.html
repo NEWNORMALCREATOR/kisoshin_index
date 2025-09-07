@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ご挨拶 | 輝装心コーディネーター</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #FF9800;
+            --primary-red: #FF120A;
+            --primary-yellow: #FFC107;
+            --accent-light: #FFE082;
+            --brown-primary: #6B4423;
+            --brown-secondary: #8B5A3C;
+            --brown-light: #A0735E;
+            --cream: #F5F1ED;
+            --warm-white: #FEFCF8;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.7;
+        }
+        
+        .theme-orange {
+            --bg-primary: var(--warm-white);
+            --bg-secondary: var(--cream);
+            --text-primary: #2D1810;
+            --text-secondary: #5D4037;
+            --accent: var(--primary-orange);
+            --accent-hover: var(--primary-red);
+            --card-bg: rgba(255, 152, 0, 0.05);
+            --border: rgba(255, 152, 0, 0.2);
+        }
+        
+        .bg-primary { background-color: var(--bg-primary); }
+        .bg-secondary { background-color: var(--bg-secondary); }
+        .text-primary { color: var(--text-primary); }
+        .text-secondary { color: var(--text-secondary); }
+        .accent-bg { background-color: var(--accent); }
+        .accent-text { color: var(--accent); }
+        .accent-border { border-color: var(--accent); }
+        .card-bg { background-color: var(--card-bg); }
+        .custom-border { border-color: var(--border); }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover {
+            background-color: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hamburger-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,151,167,0.95);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hamburger-menu.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(255,152,0,0.9), rgba(255,18,10,0.8));
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 3rem 0;
+        }
+        
+        .career-item {
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .career-year {
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .book-section {
+            background: linear-gradient(135deg, var(--card-bg), rgba(255,193,7,0.1));
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .profile-image {
+            border: 4px solid var(--accent);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .seminar-image {
+            border-radius: 1rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        @media (min-width: 768px) {
+            .hamburger-menu {
+                width: 400px;
+                height: auto;
+                right: 0;
+                left: auto;
+                top: 70px;
+                border-radius: 0 0 0 20px;
+            }
+        }
+    </style>
+</head>
+<body class="theme-orange bg-primary text-primary min-h-screen">
+    <!-- Header -->
+    <header class="bg-primary shadow-sm relative z-40">
+        <div class="max-w-md mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="logo-svg w-10 h-10">
+                    <img
+                        src="https://newnormal-creator.com/wp-content/uploads/2025/09/Gemini_Generated_Image_nn3buknn3buknn3b1-removebg-preview.png"
+                        alt="輝装心コーディネーター ロゴ"
+                        class="w-full h-full object-contain"
+                        width="40" height="40"
+                        loading="eager" decoding="async"
+                        fetchpriority="high"
+                    >
+                </div>
+                <h1 class="text-lg font-bold">輝装心コーディネーター</h1>
+            </div>
+            <button class="hamburger-btn p-2" onclick="toggleMenu()">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <div class="hamburger-content text-center">
+            <button class="absolute top-6 right-6 text-white text-2xl" onclick="toggleMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+            <nav class="mt-12">
+                <ul class="space-y-6 text-white text-lg">
+                    <li><a href="/" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-home"></i><span>トップページ</span></a></li>
+                    <li><a href="#greeting" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-user"></i><span>ご挨拶</span></a></li>
+                    <li><a href="#career" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-graduation-cap"></i><span>経歴・資格</span></a></li>
+                    <li><a href="/#services" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-palette"></i><span>サービス内容</span></a></li>
+                    <li><a href="/#contact" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-envelope"></i><span>ご予約</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pb-0">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden">
+            <div class="gradient-overlay absolute inset-0"></div>
+            <div class="relative z-10 max-w-md mx-auto px-4 py-16 text-center text-white">
+                <h2 class="text-3xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">
+                    ご挨拶
+                </h2>
+                <p class="text-lg opacity-90">
+                    輝装心コーディネーター<br>
+                    サカモトマサコのご紹介
+                </p>
+            </div>
+        </section>
+
+        <!-- Greeting Section -->
+        <section id="greeting" class="py-16">
+            <div class="max-w-md mx-auto px-4">
+                <div class="bg-secondary rounded-lg p-6 shadow-lg mb-8">
+                    <figure class="mx-auto mb-6" style="max-width:300px;">
+                        <img
+                            src="https://newnormal-creator.com/wp-content/uploads/2025/09/jigazo3.jpg"
+                            alt="サカモトマサコのプロフィール写真"
+                            loading="lazy"
+                            decoding="async"
+                            class="profile-image block w-full h-auto mx-auto"
+                            width="300"
+                        >
+                    </figure>
+                    
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-primary mb-2">サカモトマサコ</h3>
+                        <p class="accent-text font-semibold">輝装心コーディネーター</p>
+                    </div>
+
+                    <div class="space-y-4 text-secondary text-sm leading-relaxed">
+                        <p>
+                            こんにちは♪輝装心コーディネーターのサカモトマサコです。<br>
+                            活動名である【輝装心】という字には「輝く装い心」、装いを通じて心まで輝いてほしいという願いを込めました。
+                        </p>
+                        
+                        <p>
+                            パーソナルカラー講師として20年以上、多くの方々に似合う色をご提案してきましたが、時間が経つと元の好みに戻ってしまう方も多く、色の効果を定着させるには心の納得が必要だと気づき、心理学も学びました。現在は、パーソナルカラー診断・コーディネート・心理サポートを含むオンリーワンのレッスンを展開しています。
+                        </p>
+                        
+                        <p>
+                            過去に、本来の肌色が分かりづらく困った経験から、スキンケアとメイクアドバイザーの資格を取得して、レッスンに役立てております。
+                        </p>
+                        
+                        <p>
+                            また、私自ら手掛けたハンドメイドアクセサリー「ソウタシエジュエリー」の制作も行っています。パーソナルカラーと合わせて、装いに合わせる小物選びをすることで、より素敵に印象付けることもできます。
+                        </p>
+                        
+                        <p class="font-semibold text-primary">
+                            本来の美しさを引き出すお手伝いを、心を込めてさせていただきます。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Seminar Image -->
+                <div class="mb-8">
+                    <figure class="mx-auto" style="max-width:350px;">
+                        <img
+                            src="https://newnormal-creator.com/wp-content/uploads/2025/09/seminar3.jpg"
+                            alt="セミナーでの指導風景"
+                            loading="lazy"
+                            decoding="async"
+                            class="seminar-image block w-full h-auto mx-auto"
+                            width="350"
+                        >
+                        <figcaption class="text-center text-xs text-secondary mt-2">セミナーでの指導風景</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Published Book Section -->
+        <section class="bg-secondary py-12">
+            <div class="max-w-md mx-auto px-4">
+                <div class="book-section">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">
+                            出版書籍
+                        </h3>
+                        <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+                    </div>
+                    
+                    <div class="bg-primary rounded-lg p-4 shadow-md">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-20 h-24 bg-gray-200 rounded shadow-sm flex-shrink-0 overflow-hidden">
+                                <img
+                                    src="https://m.media-amazon.com/images/I/71iVrAOaVHL._SY466_.jpg"
+                                    alt="あなたの見ため力を上げる極意 書籍表紙"
+                                    loading="lazy"
+                                    decoding="async"
+                                    class="w-full h-full object-cover"
+                                    width="80" height="96"
+                                >
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-primary mb-2">
+                                    あなたの見ため力を上げる極意<br>
+                                    <span class="text-sm text-secondary">（色・肌・心）</span>
+                                </h4>
+                                <p class="text-xs text-secondary mb-3">
+                                    2016年電子書籍として出版
+                                </p>
+                                <a href="https://www.amazon.co.jp/あなたの見ため力を上げる極意-色・肌・心-坂本正子-ebook/dp/B01J1GS28K/" 
+                                   target="_blank" 
+                                   rel="noopener"
+                                   class="btn-primary text-xs px-3 py-1 rounded">
+                                    <i class="fab fa-amazon mr-1"></i>
+                                    Amazonで見る
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Section -->
+        <section id="career" class="py-16">
+            <div class="max-w-md mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-bold text-primary mb-4">経歴・資格</h2>
+                    <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6 shadow-lg">
+                    <div class="space-y-6">
+                        <!-- Career Timeline -->
+                        <div class="career-item">
+                            <div class="career-year">2001</div>
+                            <p class="text-sm text-secondary">
+                                3級色彩コーディネーター資格取得<br>
+                                <span class="text-xs">(文部省認可で通称A・F・T)</span>
+                            </p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2002</div>
+                            <p class="text-sm text-secondary">2級色彩コーディネーター資格取得</p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2003</div>
+                            <p class="text-sm text-secondary">
+                                カラリストスクール・ワム I・C・I卒業<br>
+                                <span class="text-xs">(トータルカラリストコース、パーソナルカラー・スペシャリストコース)</span><br>
+                                ワム登録講師資格取得
+                            </p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2004</div>
+                            <p class="text-sm text-secondary">日本メンタルヘルスにて「基礎心理カウンセラー」資格取得</p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2005</div>
+                            <p class="text-sm text-secondary">(株)アートプランニングにてパーソナルカラー講習会</p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2006</div>
+                            <p class="text-sm text-secondary">
+                                日本色育推進会 色育アドバイザー資格取得<br>
+                                ノエビア化粧品代理店登録<br>
+                                <span class="text-xs">(化粧品会社で初めてメイクにパーソナルカラーを用いた会社)</span>
+                            </p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2009</div>
+                            <p class="text-sm text-secondary">マンションの集会室でカラー講座スタート</p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2012</div>
+                            <p class="text-sm text-secondary">
+                                港区神明プラザにてカラーレッスンスタート<br>
+                                和み彩香 カラーセラピーティーチャー資格取得
+                            </p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2014</div>
+                            <p class="text-sm text-secondary">
+                                銀座ユニークにて、銀座初カラーセミナー<br>
+                                <span class="text-xs">(29万8千円レッスン1本販売)</span>
+                            </p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2015</div>
+                            <p class="text-sm text-secondary">
+                                銀座並木通りビジネス倶楽部にて(スペース契約)<br>
+                                パーソナルカラー診断はじめ、様々なレッスンスタート
+                            </p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2016</div>
+                            <p class="text-sm text-secondary">
+                                日比谷文化館にてコラボセミナー<br>
+                                <span class="text-xs">(イタリア本数冊出版している三浦陽一氏と)</span><br>
+                                電子書籍出版「見ため力を上げる極意(色・肌・心)」<br>
+                                原宿テレビ出演<br>
+                                ラジオ日本出演
+                            </p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2017</div>
+                            <p class="text-sm text-secondary">
+                                ストアカ講座スタート<br>
+                                カフェコンサルスタート<br>
+                                「3ヶ月で綺麗になるレッスン」モニタースタート
+                            </p>
+                        </div>
+
+                        <div class="career-item">
+                            <div class="career-year">2021</div>
+                            <p class="text-sm text-secondary">ソウタシエジュエリーデュプロマ取得</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <a href="/" class="btn-primary inline-flex items-center px-6 py-3 rounded-lg">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        <span>トップページに戻る</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-primary border-t custom-border mt-0">
+        <div class="max-w-md mx-auto px-4 py-8">
+            <!-- ロゴ＆サイト名 -->
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <div class="logo-svg w-10 h-10">
+                    <img
+                        src="https://newnormal-creator.com/wp-content/uploads/2025/09/Gemini_Generated_Image_nn3buknn3buknn3b1-removebg-preview.png"
+                        alt="輝装心コーディネーター ロゴ"
+                        class="w-full h-full object-contain"
+                        width="40" height="40"
+                        loading="lazy" decoding="async"
+                    >
+                </div>
+                <span class="text-sm font-semibold">輝装心コーディネーター</span>
+            </div>
+
+            <!-- 外部リンク -->
+            <div class="flex items-center justify-center space-x-8">
+                <!-- BASE -->
+                <a href="https://amion822.base.shop/" target="_blank" rel="noopener" 
+                   class="text-primary hover:accent-text inline-flex items-center space-x-2" aria-label="BASEショップ">
+                    <i class="fas fa-store text-xl"></i><span class="text-sm">BASE</span>
+                </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/shikisailc822" target="_blank" rel="noopener" 
+                   class="text-primary hover:accent-text inline-flex items-center space-x-2" aria-label="Instagram">
+                    <i class="fab fa-instagram text-xl"></i><span class="text-sm">Instagram</span>
+                </a>
+                <!-- note -->
+                <a href="https://note.com/ginza1107" target="_blank" rel="noopener"
+                   class="text-primary hover:accent-text inline-flex items-center space-x-2" aria-label="note">
+                    <i class="fas fa-pen-nib text-xl"></i><span class="text-sm">note</span>
+                </a>
+            </div>
+            <p class="text-center text-secondary text-xs mt-4">
+                &copy; <span id="footer-year"></span> Kisoushin Coordinator
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu functionality
+        function toggleMenu() {
+            const menu = document.getElementById('hamburgerMenu');
+            menu.classList.toggle('active');
+            
+            if (menu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close menu when clicking outside or pressing escape
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('hamburgerMenu');
+            const hamburgerBtn = document.querySelector('.hamburger-btn');
+            
+            if (menu.classList.contains('active') && !menu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+                toggleMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const menu = document.getElementById('hamburgerMenu');
+                if (menu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            }
+        });
+
+        // Smooth scroll to sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close menu if open
+                    const menu = document.getElementById('hamburgerMenu');
+                    if (menu.classList.contains('active')) {
+                        toggleMenu();
+                    }
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // フッター年号
+            const fy = document.getElementById('footer-year');
+            if (fy) fy.textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
