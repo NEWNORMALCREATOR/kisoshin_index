@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>サービス内容 | 輝装心コーディネーター</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-orange:#FF9800; --primary-red:#FF120A; --primary-yellow:#FFC107; --accent-light:#FFE082;
+      --brown-primary:#6B4423; --brown-secondary:#8B5A3C; --brown-light:#A0735E; --cream:#F5F1ED; --warm-white:#FEFCF8;
+    }
+    body { font-family:'Noto Sans JP',sans-serif; line-height:1.7; }
+    .theme-orange {
+      --bg-primary:var(--warm-white); --bg-secondary:var(--cream);
+      --text-primary:#2D1810; --text-secondary:#5D4037;
+      --accent:var(--primary-orange); --accent-hover:var(--primary-red);
+      --card-bg:rgba(255,152,0,.05); --border:rgba(255,152,0,.2);
+    }
+    .bg-primary{background:var(--bg-primary);} .bg-secondary{background:var(--bg-secondary);}
+    .text-primary{color:var(--text-primary);} .text-secondary{color:var(--text-secondary);}
+    .accent-bg{background:var(--accent);} .accent-text{color:var(--accent);} .custom-border{border-color:var(--border);}
+    .card-bg{background:var(--card-bg);}
+    .btn-primary{background:var(--accent); color:#fff; transition:all .3s ease;}
+    .btn-primary:hover{background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 25px rgba(0,0,0,.15);}
+    .btn-outline{border:2px solid var(--accent); color:var(--accent); background:transparent; transition:all .3s ease;}
+    .btn-outline:hover{background:var(--accent); color:#fff; transform:translateY(-2px);}
+    .hamburger-menu{position:fixed; top:0; left:0; width:100%; height:100vh; background:rgba(0,151,167,.95); z-index:1000; display:none; align-items:center; justify-content:center;}
+    .hamburger-menu.active{display:flex; animation:fadeIn .3s ease;}
+    @keyframes fadeIn{from{opacity:0} to{opacity:1}}
+    .gradient-overlay{background:linear-gradient(135deg, rgba(255,152,0,.9), rgba(255,18,10,.8));}
+    .logo-svg{filter:drop-shadow(0 2px 4px rgba(0,0,0,.1));}
+    .check-icon{color:var(--accent); margin-right:8px;}
+    .feature-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin:1.25rem 0;}
+    .feature-item{background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:.75rem;}
+    .service-icon{width:60px; height:60px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin:0 auto 1rem;}
+    .price-tag{background:var(--accent); color:#fff; padding:.4rem .9rem; border-radius:20px; font-weight:700; display:inline-block; margin-bottom:1rem;}
+    /* 提供サービス枠：ホバーで浮かない静的スタイル（依頼により :hover の変形やアニメ無効） */
+    .service-card{background:var(--bg-primary); border:2px solid var(--border); border-radius:16px; padding:1.5rem; box-shadow:0 8px 24px rgba(0,0,0,.08);}
+    .service-card:hover{transform:none; box-shadow:0 8px 24px rgba(0,0,0,.08);}
+    @media (min-width:768px){
+      .hamburger-menu{width:400px; height:auto; right:0; left:auto; top:70px; border-radius:0 0 0 20px;}
+    }
+
+/* セクションの交互背景＋区切り線 */
+.alt-section { position: relative; }
+.alt-section + .alt-section { border-top: 1px solid var(--border); } /* セクション間の線 */
+.alt-light  { background: var(--bg-primary); }   /* 明るい白系 */
+.alt-cream  { background: var(--bg-secondary); } /* クリーム系 */
+
+  </style>
+</head>
+<body class="theme-orange bg-primary text-primary min-h-screen">
+  <!-- Header -->
+  <header class="bg-primary shadow-sm relative z-40">
+    <div class="max-w-md mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <h1 class="m-0 text-lg font-bold">
+          <a href="https://newnormalcreator.github.io/kisoshin_index/" class="inline-flex items-center space-x-3 hover:opacity-80" aria-label="トップページへ">
+            <img src="https://newnormal-creator.com/wp-content/uploads/2025/09/Gemini_Generated_Image_nn3buknn3buknn3b1-removebg-preview.png" alt="輝装心コーディネーター ロゴ" class="logo-svg w-10 h-10 object-contain" width="40" height="40" loading="eager" decoding="async" fetchpriority="high">
+            <span class="leading-none">輝装心コーディネーター</span>
+          </a>
+        </h1>
+      </div>
+      <button class="hamburger-btn p-2" onclick="toggleMenu()"><i class="fas fa-bars text-xl"></i></button>
+    </div>
+  </header>
+
+  <!-- Hamburger Menu -->
+  <div class="hamburger-menu" id="hamburgerMenu">
+    <div class="text-center relative">
+      <button class="absolute top-6 right-6 text-white text-2xl" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+      <nav class="mt-12">
+        <ul class="space-y-6 text-white text-lg">
+          <li><a href="https://newnormalcreator.github.io/kisoshin_index/" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-home"></i><span>トップページ</span></a></li>
+          <li><a href="https://newnormalcreator.github.io/kisoshin_index/greeting" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-user"></i><span>ご挨拶</span></a></li>
+          <li><a href="https://newnormalcreator.github.io/kisoshin_index/services" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-palette"></i><span>サービス内容</span></a></li>
+          <li><a href="https://newnormalcreator.github.io/kisoshin_index/#testimonials" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-star"></i><span>お客様の声</span></a></li>
+          <li><a href="https://newnormalcreator.github.io/kisoshin_index/#process" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-list-ol"></i><span>お申し込み後の流れ</span></a></li>
+          <li><a href="https://newnormalcreator.github.io/kisoshin_index/pricing" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-yen-sign"></i><span>料金体系</span></a></li>
+          <li><a href="https://newnormalcreator.github.io/kisoshin_index/#faq" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-question-circle"></i><span>よくあるご質問</span></a></li>
+          <li><a href="https://newnormalcreator.github.io/kisoshin_index/#contact" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-envelope"></i><span>ご予約</span></a></li>
+          <li><a href="https://newnormalcreator.github.io/kisoshin_index/privacy_policy" class="flex items-center justify-center space-x-3 py-3 hover:text-yellow-300 transition"><i class="fas fa-shield-alt"></i><span>プライバシーポリシー</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <main class="pb-0">
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="gradient-overlay absolute inset-0"></div>
+      <div class="relative z-10 max-w-md mx-auto px-4 py-16 text-center text-white">
+        <h2 class="text-3xl font-bold mb-4" style="font-family:'Playfair Display',serif;">サービス内容</h2>
+        <p class="text-lg opacity-90">あなたに最適なパーソナルカラーサービスをご提案</p>
+      </div>
+    </section>
+
+    <!-- パーソナルカラー診断とは -->
+    <section class="py-16">
+      <div class="max-w-md mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl font-bold text-primary mb-4">パーソナルカラー診断とは</h2>
+          <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+        </div>
+        <!-- 追加画像（ご指定URL） -->
+        <div class="img-wrap mb-6">
+          <div class="media-box">
+            <img src="https://newnormal-creator.com/wp-content/uploads/2025/09/c6e96528-e920-4ffc-bd12-5cd5b1530db3-e1757337240137.png" alt="パーソナルカラー診断 イメージ">
+          </div>
+        </div>
+        <div class="bg-secondary rounded-lg p-6 shadow-lg mb-8">
+          <p class="text-secondary leading-relaxed mb-4">
+            「パーソナルカラー診断」とは、あなたの肌・髪・瞳の色に調和する“似合う色”を見つけるための診断です。
+          </p>
+          <p class="text-secondary leading-relaxed mb-4">
+            人それぞれ、似合う色は違います。その色を身につけるだけで、顔色が明るく見えたり、肌がきれいに見えたり、印象がグッと良くなることも。
+          </p>
+          <p class="text-secondary leading-relaxed">
+            特別な知識がなくても大丈夫。専門のアドバイザーが、色布（ドレープ）を使って、一緒に“あなたを最も引き立てる色”を見つけていきます。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- どんな人が受けているの？ -->
+    <section class="bg-secondary py-16">
+      <div class="max-w-md mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl font-bold text-primary mb-4">どんな人が受けているの？</h2>
+          <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+        </div>
+        <div class="bg-primary rounded-lg p-6 shadow-lg">
+          <div class="space-y-3">
+            <div class="flex items-center"><i class="fas fa-check check-icon"></i><span class="text-secondary">コーディネートに自信がない</span></div>
+            <div class="flex items-center"><i class="fas fa-check check-icon"></i><span class="text-secondary">第一印象を良くしたい</span></div>
+            <div class="flex items-center"><i class="fas fa-check check-icon"></i><span class="text-secondary">メイクや髪色で悩んでいる</span></div>
+            <div class="flex items-center"><i class="fas fa-check check-icon"></i><span class="text-secondary">婚活・就活・撮影など、勝負のシーンを控えている</span></div>
+            <div class="flex items-center"><i class="fas fa-check check-icon"></i><span class="text-secondary">自分に似合う色を知ってみたい…</span></div>
+          </div>
+          <p class="text-center text-primary font-semibold mt-6">そんな方々が、年齢や性別を問わず多く利用されています。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 診断方法 + 画像（★帯背景でコントラスト） -->
+    <section class="py-16 section-contrast">
+      <div class="max-w-md mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl font-bold text-primary mb-4">パーソナルカラーの診断方法</h2>
+          <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+        </div>
+
+        <div class="bg-primary rounded-lg p-6 shadow-lg mb-8">
+          <h3 class="text-xl font-semibold text-primary mb-4">なんとなく「似合わない…」そう感じたこと、ありませんか？</h3>
+          <ul class="space-y-2 mb-4">
+            <li class="flex items-center text-secondary"><i class="fas fa-circle text-xs accent-text mr-3"></i>洋服の色がしっくりこない</li>
+            <li class="flex items-center text-secondary"><i class="fas fa-circle text-xs accent-text mr-3"></i>メイクをしているのに疲れて見える</li>
+          </ul>
+          <p class="text-secondary mb-4">実はそれ、“色”が原因かもしれません。</p>
+          <p class="text-secondary">パーソナルカラー診断では、お一人お一人の肌や髪・瞳の色に調和する「本当に似合う色」を見つけます。</p>
+        </div>
+
+        <!-- 追加画像（任意差し替え可） -->
+        <div class="img-wrap mb-6">
+          <div class="media-box">
+            <img src="https://newnormal-creator.com/wp-content/uploads/2025/09/personalcolor-e1757341070700.jpg" alt="パーソナルカラー診断 イメージ2">
+          </div>
+        </div>
+
+        <!-- ビフォー / アフター（縦並び・中央・大きめ） -->
+        <div class="space-y-8 mb-8">
+          <p class="text-center text-primary font-bold text-2xl">ビフォー・アフター</p>
+          <figure class="text-center">
+            <img src="https://newnormal-creator.com/wp-content/uploads/2025/09/1757327854597.jpg" alt="パーソナルカラー診断 ビフォー" class="block mx-auto w-full max-w-[560px] h-auto object-contain rounded-lg shadow-md" loading="lazy">
+          </figure>
+
+          <p class="text-center text-primary font-bold text-2xl">ビフォー・アフター</p>
+          <figure class="text-center">
+            <img src="https://newnormal-creator.com/wp-content/uploads/2025/09/1757327852758.jpg" alt="パーソナルカラー診断 アフター" class="block mx-auto w-full max-w-[560px] h-auto object-contain rounded-lg shadow-md" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- メイク指導 + 画像（★オレンジ系の淡色帯で差別化） -->
+    <section class="bg-secondary py-16">
+      <div class="max-w-md mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl font-bold text-primary mb-4">パーソナルカラー診断メイク指導</h2>
+          <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+        </div>
+
+        <div class="bg-primary rounded-lg p-6 shadow-lg mb-8">
+          <p class="text-secondary">診断と合わせて、あなたのパーソナルカラーに合わせたメイク方法をお教えします。似合う色を使うことで、自然で美しい仕上がりが実現できます。</p>
+        </div>
+
+        <!-- ビフォー / アフター（縦並び・中央・大きめ） -->
+        <div class="space-y-8 mb-8">
+          <p class="text-center text-primary font-bold text-2xl">ビフォー・アフター</p>
+          <figure class="text-center">
+            <img src="https://newnormal-creator.com/wp-content/uploads/2025/09/1757327850393.jpg" alt="メイク指導 ビフォー" class="block mx-auto w-full max-w-[560px] h-auto object-contain rounded-lg shadow-md" loading="lazy">
+          </figure>
+
+          <p class="text-center text-primary font-bold text-2xl">ビフォー・アフター</p>
+          <figure class="text-center">
+            <img src="https://newnormal-creator.com/wp-content/uploads/2025/09/before-after2.jpg" alt="メイク指導 アフター" class="block mx-auto w-full max-w-[560px] h-auto object-contain rounded-lg shadow-md" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 提供サービス -->
+    <section id="services" class="py-16">
+      <div class="max-w-md mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl font-bold text-primary mb-4">提供サービス</h2>
+          <div class="w-16 h-1 accent-bg mx-auto rounded"></div>
+        </div>
+
+        <!-- ① カフェコンサルティング -->
+        <div class="service-card mb-8">
+          <h3 class="text-xl font-bold text-primary text-center mb-3">カフェコンサルティング</h3>
+          <div class="text-center"><span class="price-tag">¥8,000（税込）</span></div>
+          <figure class="mx-auto mb-4" style="max-width:320px;">
+            <div class="media-box">
+              <img src="https://newnormal-creator.com/wp-content/uploads/2025/09/cafe_women_bright_plus.png" alt="カフェでのコンサルティングの様子" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <p class="text-secondary text-sm leading-relaxed mb-4">
+            都内にあるお気に入りのカフェでリラックスした雰囲気の中、お悩みやご希望を丁寧にお伺いし、最適なプランをご提案いたします。まずは会ってみたいという方におすすめです。<br>
+            「パーソナルカラー診断ってどんな診断をするの？」「自分に似合う色やファッションアイテムの選び方が分からなくなった」などさまざまなご相談を承っています。
+          </p>
+          <div class="text-center mt-4">
+            <a href="https://newnormalcreator.github.io/kisoshin_index/pricing" class="btn-primary px-6 py-3 rounded-lg inline-block">詳細を見る</a>
+          </div>
+        </div>
+
+        <!-- ② パーソナルカラー総合レッスン -->
+        <div class="service-card mb-8">
+          <h3 class="text-xl font-bold text-primary text-center mb-3">パーソナルカラー総合レッスン</h3>
+          <div class="text-center"><span class="price-tag">¥300,000（税込）</span></div>
+          <figure class="mx-auto mb-4" style="max-width:320px;">
+            <div class="media-box">
+              <img src="https://newnormal-creator.com/wp-content/uploads/2025/09/ChatGPT_Image_202598_22_50_40.png" alt="パーソナルカラー診断のイメージ" loading="lazy" decoding="async">
+            </div>
+          </figure>
+          <p class="text-secondary text-sm leading-relaxed mb-4">
+            肌・瞳・髪・頬・唇を丁寧に分析し、最も美しく見える色グループ（春・夏・秋・冬）を正確に診断。理論と実践を通して、メイク・服・小物までトータルで似合うをカスタマイズします。<br>
+            パーソナルカラー診断から始まり、メイクアップやヘアスタイルのアドバイス、おすすめのファッションアイテムを買い物同行しながらご提案など幅広くサポートいたします。<br>
+            診断終了後も、アフターフォローとしていつでも再診断やファッションアイテムの選び方、メイクのワンポイントアドバイスなどのご相談を受け付けています。<br>
+          </p>
+          <div class="text-center mt-2">
+            <a href="https://newnormalcreator.github.io/kisoshin_index/pricing" class="btn-primary px-6 py-3 rounded-lg inline-block">詳細を見る</a>
+          </div>
+        </div>
+
+        <!-- ③ BASE出店ストア -->
+        <div class="service-card">
+          <h3 class="text-xl font-bold text-primary text-center mb-3">BASE出店ストア</h3>
+          <p class="text-secondary text-sm leading-relaxed text-center mb-4">
+            私自ら手掛けたハンドメイドアクセサリー「ソウタシエジュエリー」の制作も行っており、<br>
+            パーソナルカラーと合わせて、装いに合わせる小物選びをすることで、より素敵に印象付けることもできます。
+          </p>
+          <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="media-box-sm"><img src="https://baseec-img-mng.akamaized.net/images/item/origin/be079d00f735866652069aef5957c214.jpg?imformat=generic&q=90&im=Resize,width=1280,type=normal" alt="商品 1" loading="lazy"></div>
+            <div class="media-box-sm"><img src="https://baseec-img-mng.akamaized.net/images/item/origin/75061050b102c53086c3b706c1a23c93.jpg?imformat=generic&q=90&im=Resize,width=1280,type=normal" alt="商品 2" loading="lazy"></div>
+            <div class="media-box-sm"><img src="https://baseec-img-mng.akamaized.net/images/item/origin/000dae6b0392b50037fabf99f6d6877e.jpg?imformat=generic&q=90&im=Resize,width=1280,type=normal" alt="商品 3" loading="lazy"></div>
+            <div class="media-box-sm"><img src="https://baseec-img-mng.akamaized.net/images/item/origin/a54a7c8458c38ae7a7dc171a6e8ab881.jpg?imformat=generic&q=90&im=Resize,width=1280,type=normal" alt="商品 4" loading="lazy"></div>
+          </div>
+          <div class="text-center mt-2">
+            <a href="https://amion822.base.shop/" target="_blank" rel="noopener" class="btn-primary px-6 py-3 rounded-lg inline-block">
+              <i class="fas fa-external-link-alt mr-2"></i>ショップを見る
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-secondary py-16">
+      <div class="max-w-md mx-auto px-4 text-center">
+        <h2 class="text-2xl font-bold text-primary mb-4">あなたに最適なサービスを一緒に見つけましょう</h2>
+        <div class="space-y-4">
+          <a href="https://newnormalcreator.github.io/kisoshin_index/#contact" class="btn-primary block py-4 rounded-lg text-lg font-semibold">
+            <i class="fas fa-envelope mr-2"></i>無料相談・ご予約
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-primary border-t custom-border mt-0">
+    <div class="max-w-md mx-auto px-4 py-8">
+      <div class="flex justify-center mb-4">
+        <a href="https://newnormalcreator.github.io/kisoshin_index/" class="inline-flex items-center space-x-3" aria-label="トップページへ">
+          <img src="https://newnormal-creator.com/wp-content/uploads/2025/09/Gemini_Generated_Image_nn3buknn3buknn3b1-removebg-preview.png" alt="輝装心コーディネーター ロゴ" class="logo-svg w-10 h-10 object-contain" width="40" height="40" loading="lazy" decoding="async">
+          <span class="text-sm font-semibold leading-none">輝装心コーディネーター</span>
+        </a>
+      </div>
+      <div class="flex items-center justify-center space-x-8">
+        <a href="https://amion822.base.shop/" target="_blank" rel="noopener" class="text-primary hover:accent-text inline-flex items-center space-x-2" aria-label="BASEショップ"><i class="fas fa-store text-xl"></i><span class="text-sm">BASE</span></a>
+        <a href="https://www.instagram.com/shikisailc822" target="_blank" rel="noopener" class="text-primary hover:accent-text inline-flex items-center space-x-2" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i><span class="text-sm">Instagram</span></a>
+        <a href="https://note.com/ginza1107" target="_blank" rel="noopener" class="text-primary hover:accent-text inline-flex items-center space-x-2" aria-label="note"><i class="fas fa-pen-nib text-xl"></i><span class="text-sm">note</span></a>
+      </div>
+      <p class="text-center text-secondary text-xs mt-4">&copy; <span id="footer-year"></span> Kisoushin Coordinator</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu(){const m=document.getElementById('hamburgerMenu'); m.classList.toggle('active'); document.body.style.overflow=m.classList.contains('active')?'hidden':'auto';}
+    document.addEventListener('click',e=>{const m=document.getElementById('hamburgerMenu'); const b=document.querySelector('.hamburger-btn'); if(m.classList.contains('active')&&!m.contains(e.target)&&!b.contains(e.target)) toggleMenu();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){const m=document.getElementById('hamburgerMenu'); if(m.classList.contains('active')) toggleMenu();}});
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){const href=this.getAttribute('href'); if(href&&href.startsWith('#')){e.preventDefault(); const t=document.querySelector(href); if(t){t.scrollIntoView({behavior:'smooth',block:'start'}); const m=document.getElementById('hamburgerMenu'); if(m.classList.contains('active')) toggleMenu();}}}));
+    document.addEventListener('DOMContentLoaded',()=>{const fy=document.getElementById('footer-year'); if(fy) fy.textContent=new Date().getFullYear();});
+  </script>
+</body>
+</html>
