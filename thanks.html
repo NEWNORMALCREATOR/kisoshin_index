@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>送信完了 | 輝装心コーディネーター</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary-orange:#FF9800; --primary-red:#FF120A; --primary-yellow:#FFC107; --accent-light:#FFE082;
+      --brown-primary:#6B4423; --brown-secondary:#8B5A3C; --brown-light:#A0735E; --cream:#F5F1ED; --warm-white:#FEFCF8;
+    }
+    body{font-family:'Noto Sans JP',sans-serif; line-height:1.7;}
+    .theme-orange{
+      --bg-primary:var(--warm-white); --bg-secondary:var(--cream);
+      --text-primary:#2D1810; --text-secondary:#5D4037;
+      --accent:var(--primary-orange); --accent-hover:var(--primary-red);
+      --card-bg:rgba(255,152,0,.05); --border:rgba(255,152,0,.2);
+    }
+    .bg-primary{background:var(--bg-primary);} .bg-secondary{background:var(--bg-secondary);}
+    .text-primary{color:var(--text-primary);} .text-secondary{color:var(--text-secondary);}
+    .accent-bg{background:var(--accent);} .accent-text{color:var(--accent);} .custom-border{border-color:var(--border);}
+    .card-bg{background:var(--card-bg);}
+    .btn-primary{background:var(--accent); color:#fff; transition:all .3s ease;}
+    .btn-primary:hover{background:var(--accent-hover); transform:translateY(-2px); box-shadow:0 8px 25px rgba(0,0,0,.15);}
+    .gradient-overlay{background:linear-gradient(135deg, rgba(255,152,0,.9), rgba(255,18,10,.8));}
+  </style>
+</head>
+<body class="theme-orange bg-primary text-primary min-h-screen">
+  <!-- Header（簡略） -->
+  <header class="bg-primary shadow-sm">
+    <div class="max-w-md mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="https://newnormalcreator.github.io/kisoshin_index/" class="inline-flex items-center space-x-3 hover:opacity-80">
+        <img src="https://newnormal-creator.com/wp-content/uploads/2025/09/Gemini_Generated_Image_nn3buknn3buknn3b1-removebg-preview.png" alt="ロゴ" class="w-10 h-10 object-contain" width="40" height="40">
+        <span class="text-lg font-bold">輝装心コーディネーター</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="gradient-overlay absolute inset-0"></div>
+      <div class="relative z-10 max-w-md mx-auto px-4 py-16 text-center text-white">
+        <h2 class="text-3xl font-bold mb-2" style="font-family:'Playfair Display',serif;">送信が完了しました</h2>
+        <p class="opacity-90">このたびはご予約いただき誠にありがとうございます。</p>
+      </div>
+    </section>
+
+    <!-- Message -->
+    <section class="py-12">
+      <div class="max-w-md mx-auto px-4">
+        <div class="bg-primary rounded-lg p-6 shadow-lg custom-border border">
+          <p class="text-primary font-semibold mb-3">ご予約内容が送信完了しました。</p>
+          <p class="text-secondary mb-6">内容を確認し3日以内に折り返しご連絡させていただきます。</p>
+
+          <h3 class="text-lg font-semibold text-primary mb-3"><i class="fas fa-envelope-open-text mr-2 accent-text"></i>お問い合わせ先</h3>
+          <div class="card-bg rounded-lg p-4">
+            <p class="text-secondary text-sm"><strong>宛名：</strong>坂本正子</p>
+            <p class="text-secondary text-sm"><strong>メールアドレス：</strong><a href="mailto:p.color.palette@gmail.com" class="accent-text underline">p.color.palette@gmail.com</a></p>
+            <p class="text-secondary text-sm"><strong>電話番号：</strong><a href="tel:09026676841" class="accent-text underline">090-2667-6841</a></p>
+          </div>
+
+          <div class="text-center mt-8">
+            <a href="https://newnormalcreator.github.io/kisoshin_index/" class="btn-primary inline-flex items-center px-6 py-3 rounded-lg">
+              <i class="fas fa-home mr-2"></i>トップページへ戻る
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-primary border-t custom-border">
+    <div class="max-w-md mx-auto px-4 py-8 text-center text-secondary text-xs">
+      &copy; <span id="footer-year"></span> Kisoushin Coordinator
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded',()=> {
+      const fy=document.getElementById('footer-year');
+      if(fy) fy.textContent=new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>
