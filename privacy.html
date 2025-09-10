@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>プライバシーポリシー | 輝装心パーソナルカラー</title>
+  <meta name="description" content="女性向けパーソナルカラー診断のオフィシャルサイト（スマートフォン特化）。予約・お問い合わせはフォームから。" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="ホームへ">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"> <!-- 外側の花びら（大きな花びら） --> <ellipse cx="100" cy="35" rx="15" ry="30" fill="#FF120A" opacity="0.9"/> <ellipse cx="165" cy="100" rx="30" ry="15" fill="#FFC107" opacity="0.9"/> <ellipse cx="100" cy="165" rx="15" ry="30" fill="#FF120A" opacity="0.9"/> <ellipse cx="35" cy="100" rx="30" ry="15" fill="#FFC107" opacity="0.9"/> <!-- 中間の花びら（斜め方向） --> <ellipse cx="138" cy="62" rx="12" ry="25" fill="#FF9800" transform="rotate(45 138 62)"/> <ellipse cx="138" cy="138" rx="12" ry="25" fill="#FF9800" transform="rotate(-45 138 138)"/> <ellipse cx="62" cy="138" rx="12" ry="25" fill="#FF9800" transform="rotate(45 62 138)"/> <ellipse cx="62" cy="62" rx="12" ry="25" fill="#FF9800" transform="rotate(-45 62 62)"/> <!-- 内側の小さな花びら --> <ellipse cx="100" cy="55" rx="8" ry="20" fill="#FFB74D" opacity="0.8"/> <ellipse cx="145" cy="100" rx="20" ry="8" fill="#FFB74D" opacity="0.8"/> <ellipse cx="100" cy="145" rx="8" ry="20" fill="#FFB74D" opacity="0.8"/> <ellipse cx="55" cy="100" rx="20" ry="8" fill="#FFB74D" opacity="0.8"/> <!-- さらに内側の花びら（斜め） --> <ellipse cx="118" cy="82" rx="6" ry="15" fill="#FFE082" transform="rotate(45 118 82)"/> <ellipse cx="118" cy="118" rx="6" ry="15" fill="#FFE082" transform="rotate(-45 118 118)"/> <ellipse cx="82" cy="118" rx="6" ry="15" fill="#FFE082" transform="rotate(45 82 118)"/> <ellipse cx="82" cy="82" rx="6" ry="15" fill="#FFE082" transform="rotate(-45 82 82)"/> <!-- 花の中心（太陽） --> <circle cx="100" cy="100" r="25" fill="#FF120A"/> <!-- 花の中央部のハイライト --> <circle cx="95" cy="90" r="8" fill="#FFEB3B" opacity="0.9"/> <circle cx="90" cy="85" r="4" fill="#FFF9C4" opacity="0.7"/> </svg>
+        <span class="brand-title">輝装心パーソナルカラー</span>
+      </a>
+      <button class="icon-btn" aria-label="メニューを開く" id="openMenu" aria-haspopup="true" aria-expanded="false">
+        <!-- hamburger icon -->
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Overlay Navigation -->
+  <div id="navOverlay" aria-hidden="true"></div>
+  <nav id="navPanel" aria-label="サイトメニュー" aria-hidden="true">
+    <div class="nav-sheet container">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <h3>メニュー</h3>
+        <button class="icon-btn" id="closeMenu" aria-label="メニューを閉じる">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6l-12 12" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <a class="nav-item" href="index.html">トップ</a>
+      <a class="nav-item" href="greeting.html">ご挨拶</a>
+      <a class="nav-item" href="services.html">サービス内容</a>
+      <a class="nav-item" href="voice.html">お客様の声</a>
+      <a class="nav-item" href="flow.html">お申し込み後の流れ</a>
+      <a class="nav-item" href="pricing.html">料金体系</a>
+      <a class="nav-item" href="faq.html">よくあるご質問</a>
+      <a class="nav-item" href="contact.html">お問い合わせ</a>
+      <a class="nav-item" href="privacy.html">プライバシーポリシー</a>
+    </div>
+  </nav>
+  <main class="container" role="main">
+
+  <section class="section">
+    <h2>プライバシーポリシー</h2>
+    <p>本サイトでは、お問い合わせ対応のために氏名・メールアドレス・電話番号などの個人情報を取得します。</p>
+    <ul class="list">
+      <li>利用目的：お問い合わせ対応、予約連絡、サービスのご案内</li>
+      <li>第三者提供：法令に基づく場合を除きません</li>
+      <li>保管期間：目的達成後、適切に削除します</li>
+      <li>開示等請求：お問い合わせフォームよりご連絡ください</li>
+    </ul>
+  </section>
+
+  </main>
+
+  <!-- Sticky Footer CTA -->
+  <div class="footer-cta" role="region" aria-label="固定フッター">
+    <div class="footer-cta-inner">
+      <a class="btn btn-menu" href="#" id="openMenuFooter" aria-label="メニューを開く">メニュー</a>
+      <a class="btn btn-contact" href="contact.html" aria-label="お問い合わせへ">お問い合わせ</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
